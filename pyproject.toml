@@ -12,6 +12,13 @@ pypaystack2 = "^2.0.0"
 typer = {extras = ["all"], version = "^0.9.0"}
 
 
+[tool.poetry.scripts]
+paystack = "paystack_cli.main:run"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.7.0"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
