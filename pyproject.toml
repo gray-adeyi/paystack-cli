@@ -9,6 +9,7 @@ packages = [{include = "paystack_cli"}]
 [tool.poetry.dependencies]
 python = "^3.9"
 pypaystack2 = "^2.0.0"
+typer = {extras = ["all"], version = "^0.9.0"}
 
 
 [build-system]
