@@ -55,7 +55,9 @@ def charge(
     queue: bool = False,
 ):
     if metadata:
-        metadata = parse_cli_string(raw_string=metadata, arg_or_option_name="metadata", expected_type=dict)
+        metadata = parse_cli_string(
+            raw_string=metadata, arg_or_option_name="metadata", expected_type=dict
+        )
     return get_paystack_wrapper().transactions.charge(
         amount=amount,
         email=email,
@@ -109,7 +111,7 @@ def init(
     callback_url: Optional[str] = None,
     plan_id: Optional[str] = None,
     invoice_limit: Optional[int] = None,
-        metadata: Optional[str] = None,
+    metadata: Optional[str] = None,
     channels: Optional[list[Channel]] = None,
     split_code: Optional[str] = None,
     subaccount: Optional[str] = None,
@@ -117,7 +119,9 @@ def init(
     bearer: Optional[Bearer] = None,
 ):
     if metadata:
-        metadata = parse_cli_string(raw_string=metadata, arg_or_option_name="metadata", expected_type=dict)
+        metadata = parse_cli_string(
+            raw_string=metadata, arg_or_option_name="metadata", expected_type=dict
+        )
     return get_paystack_wrapper().transactions.initialize(
         amount=amount,
         email=email,
