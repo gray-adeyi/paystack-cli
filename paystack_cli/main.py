@@ -1,6 +1,7 @@
 from typer import Typer
 from rich import print as rprint
 
+from paystack_cli.terminals import terminal_app
 from paystack_cli.transactions import transaction_app
 from paystack_cli.transactions_splits import transaction_split_app
 from paystack_cli.utils import reset_settings, update_settings
@@ -10,6 +11,7 @@ app = Typer(
 )
 app.add_typer(transaction_app, name="txn")
 app.add_typer(transaction_split_app, name="txn-split")
+app.add_typer(terminal_app, name="terminals")
 
 
 @app.command()
