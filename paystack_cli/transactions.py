@@ -1,9 +1,10 @@
+import json
 from typing import Optional
 
 from pypaystack2 import TransactionStatus, Currency, Channel, Bearer
 from typer import Typer
 
-from paystack_cli.utils import get_paystack_wrapper
+from paystack_cli.utils import get_paystack_wrapper, parse_cli_string
 
 transaction_app = Typer()
 
@@ -46,18 +47,22 @@ def charge(
     auth_code: str,
     reference: Optional[str] = None,
     currency: Optional[Currency] = None,
+    metadata: Optional[str] = None,
     channels: Optional[list[Channel]] = None,
     subaccount: Optional[str] = None,
     transaction_charge: Optional[int] = None,
     bearer: Optional[Bearer] = None,
     queue: bool = False,
 ):
+    if metadata:
+        metadata = parse_cli_string(raw_string=metadata, arg_or_option_name="metadata", expected_type=dict)
     return get_paystack_wrapper().transactions.charge(
         amount=amount,
         email=email,
         auth_code=auth_code,
         reference=reference,
         currency=currency,
+        metadata=metadata,
         channels=channels,
         subaccount=subaccount,
         transaction_charge=transaction_charge,
@@ -104,12 +109,15 @@ def init(
     callback_url: Optional[str] = None,
     plan_id: Optional[str] = None,
     invoice_limit: Optional[int] = None,
+        metadata: Optional[str] = None,
     channels: Optional[list[Channel]] = None,
     split_code: Optional[str] = None,
     subaccount: Optional[str] = None,
     transfer_charge: Optional[int] = None,
     bearer: Optional[Bearer] = None,
 ):
+    if metadata:
+        metadata = parse_cli_string(raw_string=metadata, arg_or_option_name="metadata", expected_type=dict)
     return get_paystack_wrapper().transactions.initialize(
         amount=amount,
         email=email,
@@ -118,6 +126,7 @@ def init(
         callback_url=callback_url,
         plan=plan_id,
         invoice_limit=invoice_limit,
+        metadata=metadata,
         channels=channels,
         split_code=split_code,
         subaccount=subaccount,

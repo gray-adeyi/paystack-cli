@@ -1,7 +1,7 @@
 import json
 import os.path
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Type
 
 from rich import print as rprint
 import typer
@@ -62,3 +62,21 @@ def get_paystack_wrapper() -> Paystack:
         )
         raise typer.Abort()
     return Paystack(auth_key=auth_key)
+
+
+def parse_cli_string(raw_string: str, arg_or_option_name: str, expected_type: Type):
+    """parses the json encoded string gotten form the cli input to the expected type"""
+    try:
+        parsed_data = json.loads(raw_string)
+        if type(parsed_data) == expected_type:
+            return parsed_data
+        if type(parsed_data) == dict:
+            return expected_type(**parsed_data)
+        if type(parsed_data) == list:
+            return [expected_type(**item) for item in parsed_data]
+    except json.decoder.JSONDecodeError:
+        rprint(
+            f"[bold red]Error![/bold red] unable to parse value in {arg_or_option_name} expects a json decodable string"
+            f" that can be parsed into a `{expected_type.__name__}`"
+        )
+        raise typer.Abort()
