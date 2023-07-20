@@ -64,19 +64,29 @@ def get_paystack_wrapper() -> Paystack:
     return Paystack(auth_key=auth_key)
 
 
-def parse_cli_string(raw_string: str, arg_or_option_name: str, expected_type: Type):
-    """parses the json encoded string gotten form the cli input to the expected type"""
+def parse_cli_string(
+    raw_string: str, arg_or_option_name: str, expected_type: Type, many: bool = False
+):
+    """parses the json encoded string gotten form the cli input to the expected type.
+
+    Args:
+        raw_string: the json decodable value passed in by the user to the cli to be parsed into the expected type.
+        arg_or_option_name: the name of the cli argument or option.
+        expected_type: the expected type
+        many: for `expected_type` other than `list` or `dict` if what we want is a list[expected_type], many should be
+            set to `True`.
+    """
     try:
         parsed_data = json.loads(raw_string)
         if type(parsed_data) == expected_type:
             return parsed_data
-        if type(parsed_data) == dict:
+        if type(parsed_data) == dict and not many:
             return expected_type(**parsed_data)
-        if type(parsed_data) == list:
+        if type(parsed_data) == list and many:
             return [expected_type(**item) for item in parsed_data]
     except json.decoder.JSONDecodeError:
         rprint(
-            f"[bold red]Error![/bold red] unable to parse value in {arg_or_option_name} expects a json decodable string"
-            f" that can be parsed into a `{expected_type.__name__}`"
+            f"[bold red]Error![/bold red] unable to parse value in `{arg_or_option_name}` option or argument, expects a json decodable string"
+            f" that can be parsed into a {'`list` of ' if many else  ''}`{expected_type.__name__}`"
         )
         raise typer.Abort()
