@@ -1,6 +1,7 @@
 from typer import Typer
 from rich import print as rprint
 
+from paystack_cli.apple_pay import app_pay_app
 from paystack_cli.customers import customer_app
 from paystack_cli.dedicated_virtual_accounts import dva_app
 from paystack_cli.terminals import terminal_app
@@ -16,6 +17,7 @@ app.add_typer(transaction_split_app, name="txn-split")
 app.add_typer(terminal_app, name="terminals")
 app.add_typer(customer_app, name="customers")
 app.add_typer(dva_app, name="dva")
+app.add_typer(app_pay_app, name="apple-pay")
 
 
 @app.command()
