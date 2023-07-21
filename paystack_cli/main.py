@@ -6,6 +6,7 @@ from paystack_cli.customers import customer_app
 from paystack_cli.dedicated_virtual_accounts import dva_app
 from paystack_cli.plans import plan_app
 from paystack_cli.subaccounts import subaccount_app
+from paystack_cli.subscriptions import subscription_app
 from paystack_cli.terminals import terminal_app
 from paystack_cli.transactions import transaction_app
 from paystack_cli.transactions_splits import transaction_split_app
@@ -22,6 +23,7 @@ app.add_typer(dva_app, name="dva")
 app.add_typer(app_pay_app, name="apple-pay")
 app.add_typer(subaccount_app, name="subacounts")
 app.add_typer(plan_app, name="plans")
+app.add_typer(subscription_app, name="subs")
 
 
 @app.command()
