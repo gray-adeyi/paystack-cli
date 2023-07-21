@@ -4,6 +4,7 @@ from rich import print as rprint
 from paystack_cli.apple_pay import app_pay_app
 from paystack_cli.customers import customer_app
 from paystack_cli.dedicated_virtual_accounts import dva_app
+from paystack_cli.plans import plan_app
 from paystack_cli.subaccounts import subaccount_app
 from paystack_cli.terminals import terminal_app
 from paystack_cli.transactions import transaction_app
@@ -20,6 +21,7 @@ app.add_typer(customer_app, name="customers")
 app.add_typer(dva_app, name="dva")
 app.add_typer(app_pay_app, name="apple-pay")
 app.add_typer(subaccount_app, name="subacounts")
+app.add_typer(plan_app, name="plans")
 
 
 @app.command()
