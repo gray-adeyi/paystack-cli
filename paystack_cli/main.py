@@ -8,6 +8,7 @@ from paystack_cli.payment_pages import payment_page_app
 from paystack_cli.payments_requests import payment_request_app
 from paystack_cli.plans import plan_app
 from paystack_cli.products import product_app
+from paystack_cli.settlements import settlement_app
 from paystack_cli.subaccounts import subaccount_app
 from paystack_cli.subscriptions import subscription_app
 from paystack_cli.terminals import terminal_app
