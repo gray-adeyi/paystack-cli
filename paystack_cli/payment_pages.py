@@ -74,7 +74,7 @@ def get_pages(
 
 
 @payment_page_app.command()
-def add_products(id: str, products: list[Union[int, str]]):
+def add_products(id: str, products: list[str]):
     return get_paystack_wrapper().payment_pages.add_products(id=id, products=products)
 
 
