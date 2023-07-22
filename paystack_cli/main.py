@@ -23,6 +23,7 @@ from paystack_cli.transfer_recipients import transfer_recipient_app
 from paystack_cli.transfers import transfer_app
 from paystack_cli.transfers_control import transfer_control_app
 from paystack_cli.utils import reset_settings, update_settings
+from paystack_cli.verification import verification_app
 
 app = Typer(
     name="Paystack", help="A command line utility for interacting with Paystack's API"
@@ -48,6 +49,7 @@ app.add_typer(integration_app, name="integration")
 app.add_typer(charge_app, name="charge")
 app.add_typer(dispute_app, name="disputes")
 app.add_typer(refund_app, name="refunds")
+app.add_typer(verification_app, name="verification")
 
 
 @app.command()
