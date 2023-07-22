@@ -16,6 +16,7 @@ from paystack_cli.transactions import transaction_app
 from paystack_cli.transactions_splits import transaction_split_app
 from paystack_cli.transfer_recipients import transfer_recipient_app
 from paystack_cli.transfers import transfer_app
+from paystack_cli.transfers_control import transfer_control_app
 from paystack_cli.utils import reset_settings, update_settings
 
 app = Typer(
@@ -36,6 +37,7 @@ app.add_typer(payment_request_app, name="pr")
 app.add_typer(settlement_app, name="settlements")
 app.add_typer(transfer_recipient_app, name="tr")
 app.add_typer(transfer_app, name="transfers")
+app.add_typer(transfer_control_app, name="transfer-ctrl")
 
 
 @app.command()
