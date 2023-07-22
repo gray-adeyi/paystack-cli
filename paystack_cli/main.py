@@ -12,6 +12,7 @@ from paystack_cli.payment_pages import payment_page_app
 from paystack_cli.payments_requests import payment_request_app
 from paystack_cli.plans import plan_app
 from paystack_cli.products import product_app
+from paystack_cli.refunds import refund_app
 from paystack_cli.settlements import settlement_app
 from paystack_cli.subaccounts import subaccount_app
 from paystack_cli.subscriptions import subscription_app
@@ -46,6 +47,7 @@ app.add_typer(bulk_charge_app, name="bc")
 app.add_typer(integration_app, name="integration")
 app.add_typer(charge_app, name="charge")
 app.add_typer(dispute_app, name="disputes")
+app.add_typer(refund_app, name="refunds")
 
 
 @app.command()
