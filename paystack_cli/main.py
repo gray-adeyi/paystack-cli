@@ -2,6 +2,7 @@ from typer import Typer
 from rich import print as rprint
 
 from charge import charge_app
+from miscellaneous import miscellaneous_app
 from paystack_cli.apple_pay import app_pay_app
 from paystack_cli.bulk_charges import bulk_charge_app
 from paystack_cli.customers import customer_app
@@ -50,6 +51,7 @@ app.add_typer(charge_app, name="charge")
 app.add_typer(dispute_app, name="disputes")
 app.add_typer(refund_app, name="refunds")
 app.add_typer(verification_app, name="verification")
+app.add_typer(miscellaneous_app, name="misc")
 
 
 @app.command()
