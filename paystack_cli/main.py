@@ -5,6 +5,7 @@ from paystack_cli.apple_pay import app_pay_app
 from paystack_cli.bulk_charges import bulk_charge_app
 from paystack_cli.customers import customer_app
 from paystack_cli.dedicated_virtual_accounts import dva_app
+from paystack_cli.integration import integration_app
 from paystack_cli.payment_pages import payment_page_app
 from paystack_cli.payments_requests import payment_request_app
 from paystack_cli.plans import plan_app
@@ -40,6 +41,7 @@ app.add_typer(transfer_recipient_app, name="tr")
 app.add_typer(transfer_app, name="transfers")
 app.add_typer(transfer_control_app, name="transfer-ctrl")
 app.add_typer(bulk_charge_app, name="bc")
+app.add_typer(integration_app, name="integration")
 
 
 @app.command()
