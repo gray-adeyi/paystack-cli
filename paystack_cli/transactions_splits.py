@@ -2,17 +2,26 @@ from typing import Optional
 
 from pypaystack2 import Split, Currency, Bearer, SplitAccount
 from typer import Typer
-from paystack_cli.utils import get_paystack_wrapper, parse_cli_string
+from paystack_cli.utils import (
+    get_paystack_wrapper,
+    parse_cli_string,
+    override_output,
+    colorized_print,
+)
 
 transaction_split_app = Typer()
 
 
 @transaction_split_app.command()
-def get_split(id: str):
+@colorized_print
+@override_output
+def get_split(id: str, data_only: bool = False):
     return get_paystack_wrapper().splits.get_split(id=id)
 
 
 @transaction_split_app.command()
+@colorized_print
+@override_output
 def get_splits(
     name: str,
     sort_by: Optional[str],
@@ -21,6 +30,7 @@ def get_splits(
     end_date: Optional[str],
     active: bool = True,
     pagination: int = 50,
+    data_only: bool = False,
 ):
     return get_paystack_wrapper().splits.get_splits(
         name=name,
@@ -34,6 +44,8 @@ def get_splits(
 
 
 @transaction_split_app.command()
+@colorized_print
+@override_output
 def create(
     name: str,
     type: Split,
@@ -41,6 +53,7 @@ def create(
     subaccounts: str,
     bearer_type: Bearer,
     bearer_subaccount: str,
+    data_only: bool = False,
 ):
     subaccounts = parse_cli_string(
         raw_string=subaccounts,
@@ -59,12 +72,15 @@ def create(
 
 
 @transaction_split_app.command()
+@colorized_print
+@override_output
 def update(
     id: str,
     name: str,
     active: bool,
     bearer_type: Optional[Bearer],
     bearer_subaccount: Optional[str],
+    data_only: bool = False,
 ):
     return get_paystack_wrapper().splits.update(
         id=id,
@@ -76,12 +92,16 @@ def update(
 
 
 @transaction_split_app.command()
-def remove(id: str, subaccount: str):
+@colorized_print
+@override_output
+def remove(id: str, subaccount: str, data_only: bool = False):
     return get_paystack_wrapper().splits.remove(id=id, subaccount=subaccount)
 
 
 @transaction_split_app.command()
-def add_or_update(id: str, subaccount: str, share: str):
+@colorized_print
+@override_output
+def add_or_update(id: str, subaccount: str, share: str, data_only: bool = False):
     return get_paystack_wrapper().splits.add_or_update(
         id=id, subaccount=subaccount, share=share
     )

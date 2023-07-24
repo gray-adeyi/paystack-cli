@@ -2,12 +2,14 @@ from typing import Optional
 
 from typer import Typer
 
-from paystack_cli.utils import get_paystack_wrapper, parse_cli_string
+from paystack_cli.utils import get_paystack_wrapper, parse_cli_string, colorized_print, override_output
 
 charge_app = Typer()
 
 
 @charge_app.command(name="")
+@colorized_print
+@override_output
 def charge(
     email: str,
     amount: int,
@@ -20,6 +22,7 @@ def charge(
     mobile_money: Optional[str] = None,
     device_id: Optional[str] = None,
     birthday: Optional[str] = None,
+        data_only: bool = False
 ):
     if bank:
         bank = parse_cli_string(
@@ -55,34 +58,46 @@ def charge(
 
 
 @charge_app.command()
-def check_pending_charge(reference: str):
+@colorized_print
+@override_output
+def check_pending_charge(reference: str, data_only: bool = False):
     return get_paystack_wrapper().charge.check_pending_charge(reference=reference)
 
 
 @charge_app.command()
-def submit_otp(otp: str, reference: str):
+@colorized_print
+@override_output
+def submit_otp(otp: str, reference: str, data_only: bool = False):
     return get_paystack_wrapper().charge.submit_otp(otp=otp, reference=reference)
 
 
 @charge_app.command()
-def submit_pin(pin: str, reference: str):
+@colorized_print
+@override_output
+def submit_pin(pin: str, reference: str, data_only: bool = False):
     return get_paystack_wrapper().charge.submit_pin(pin=pin, reference=reference)
 
 
 @charge_app.command()
-def set_address(address: str, reference: str, city: str, state: str, zipcode: str):
+@colorized_print
+@override_output
+def set_address(address: str, reference: str, city: str, state: str, zipcode: str, data_only: bool = False):
     return get_paystack_wrapper().charge.set_address(
         address=address, reference=reference, city=city, state=state, zipcode=zipcode
     )
 
 
 @charge_app.command()
-def submit_phone(phone: str, reference: str):
+@colorized_print
+@override_output
+def submit_phone(phone: str, reference: str, data_only: bool = False):
     return get_paystack_wrapper().charge.submit_phone(phone=phone, reference=reference)
 
 
 @charge_app.command()
-def submit_birthday(birthday: str, reference: str):
+@colorized_print
+@override_output
+def submit_birthday(birthday: str, reference: str, data_only: bool = False):
     return get_paystack_wrapper().charge.submit_birthday(
         birthday=birthday, reference=reference
     )

@@ -3,12 +3,19 @@ from typing import Optional
 from pypaystack2 import Schedule
 from typer import Typer
 
-from paystack_cli.utils import get_paystack_wrapper, parse_cli_string
+from paystack_cli.utils import (
+    get_paystack_wrapper,
+    parse_cli_string,
+    override_output,
+    colorized_print,
+)
 
 subaccount_app = Typer()
 
 
 @subaccount_app.command()
+@colorized_print
+@override_output
 def create(
     business_name: str,
     settlement_bank: str,
@@ -19,6 +26,7 @@ def create(
     primary_contact_name: Optional[str] = None,
     primary_contact_phone: Optional[str] = None,
     metadata: Optional[str] = None,
+    data_only: bool = False,
 ):
     if metadata:
         metadata = parse_cli_string(
@@ -38,6 +46,8 @@ def create(
 
 
 @subaccount_app.command()
+@colorized_print
+@override_output
 def update(
     id_or_code: str,
     business_name: str,
@@ -51,6 +61,7 @@ def update(
     primary_contact_phone: Optional[str] = None,
     settlement_schedule: Optional[Schedule] = None,
     metadata: Optional[str] = None,
+    data_only: bool = False,
 ):
     if metadata:
         metadata = parse_cli_string(
@@ -73,12 +84,22 @@ def update(
 
 
 @subaccount_app.command()
-def get_subaccount(id_or_code: str):
+@colorized_print
+@override_output
+def get_subaccount(id_or_code: str, data_only: bool = False):
     return get_paystack_wrapper().subaccounts.get_subaccount(id_or_code=id_or_code)
 
 
 @subaccount_app.command()
-def get_subacconts(start_date: str, end_date: str, page: int = 1, pagination: int = 50):
+@colorized_print
+@override_output
+def get_subaccounts(
+    start_date: str,
+    end_date: str,
+    page: int = 1,
+    pagination: int = 50,
+    data_only: bool = False,
+):
     return get_paystack_wrapper().subaccounts.get_subaccounts(
         start_date=start_date, end_date=end_date, page=page, pagination=pagination
     )

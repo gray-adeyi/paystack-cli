@@ -1,17 +1,21 @@
 from typer import Typer
 
-from paystack_cli.utils import get_paystack_wrapper
+from paystack_cli.utils import get_paystack_wrapper, override_output, colorized_print
 
 integration_app = Typer()
 
 
 @integration_app.command()
-def get_payment_session_timeout():
+@colorized_print
+@override_output
+def get_payment_session_timeout(data_only: bool = False):
     return get_paystack_wrapper().integration.get_payment_session_timeout()
 
 
 @integration_app.command()
-def update_payment_session_timeout(timeout: int):
+@colorized_print
+@override_output
+def update_payment_session_timeout(timeout: int, data_only: bool = False):
     return get_paystack_wrapper().integration.update_payment_session_timeout(
         timeout=timeout
     )

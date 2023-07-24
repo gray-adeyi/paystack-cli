@@ -3,17 +3,21 @@ from typing import Optional
 from pypaystack2 import DisputeStatus, Resolution
 from typer import Typer
 
-from paystack_cli.utils import get_paystack_wrapper
+from paystack_cli.utils import get_paystack_wrapper, override_output, colorized_print
 
 dispute_app = Typer()
 
 
 @dispute_app.command()
-def get_dispute(id: str):
+@colorized_print
+@override_output
+def get_dispute(id: str, data_only: bool = False):
     return get_paystack_wrapper().disputes.get_dispute(id=id)
 
 
 @dispute_app.command()
+@colorized_print
+@override_output
 def get_disputes(
     start_date: str,
     end_date: str,
@@ -21,6 +25,7 @@ def get_disputes(
     page: int = 1,
     transaction: Optional[str] = None,
     status: Optional[DisputeStatus] = None,
+data_only: bool = False
 ):
     return get_paystack_wrapper().disputes.get_disputes(
         start_date=start_date,
@@ -33,11 +38,15 @@ def get_disputes(
 
 
 @dispute_app.command()
-def get_transaction_disputes(id: str):
+@colorized_print
+@override_output
+def get_transaction_disputes(id: str, data_only: bool = False):
     return get_paystack_wrapper().disputes.get_transaction_disputes(id=id)
 
 
 @dispute_app.command()
+@colorized_print
+@override_output
 def resolve_dispute(
     id: str,
     resolution: Resolution,
@@ -45,6 +54,7 @@ def resolve_dispute(
     refund_amount: int,
     uploaded_filename: str,
     evidence: Optional[int] = None,
+data_only: bool = False
 ):
     return get_paystack_wrapper().disputes.resolve_dispute(
         id=id,
@@ -57,6 +67,8 @@ def resolve_dispute(
 
 
 @dispute_app.command()
+@colorized_print
+@override_output
 def export_disputes(
     start_date: str,
     end_date: str,
@@ -64,6 +76,7 @@ def export_disputes(
     page: int = 1,
     transaction: Optional[str] = None,
     status: Optional[DisputeStatus] = None,
+data_only: bool = False
 ):
     return get_paystack_wrapper().disputes.export_disputes(
         start_date=start_date,
@@ -76,6 +89,8 @@ def export_disputes(
 
 
 @dispute_app.command()
+@colorized_print
+@override_output
 def add_evidence(
     id: str,
     customer_email: str,
@@ -84,6 +99,7 @@ def add_evidence(
     service_details: str,
     delivery_address: Optional[str] = None,
     delivery_date: Optional[str] = None,
+data_only: bool = False
 ):
     return get_paystack_wrapper().disputes.add_evidence(
         id=id,
@@ -97,14 +113,18 @@ def add_evidence(
 
 
 @dispute_app.command()
-def get_upload_url(id: str, upload_filename: str):
+@colorized_print
+@override_output
+def get_upload_url(id: str, upload_filename: str, data_only: bool = False):
     return get_paystack_wrapper().disputes.get_upload_url(
         id=id, upload_filename=upload_filename
     )
 
 
 @dispute_app.command()
-def update_dispute(id: str, refund_amount: int, uploaded_filename: Optional[str]):
+@colorized_print
+@override_output
+def update_dispute(id: str, refund_amount: int, uploaded_filename: Optional[str], data_only: bool = False):
     return get_paystack_wrapper().disputes.update_dispute(
         id=id, refund_amount=refund_amount, uploaded_filename=uploaded_filename
     )

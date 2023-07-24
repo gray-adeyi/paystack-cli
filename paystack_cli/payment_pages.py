@@ -2,12 +2,14 @@ from typing import Optional, Union
 
 from typer import Typer
 
-from paystack_cli.utils import get_paystack_wrapper, parse_cli_string
+from paystack_cli.utils import get_paystack_wrapper, parse_cli_string, override_output, colorized_print
 
 payment_page_app = Typer()
 
 
 @payment_page_app.command()
+@colorized_print
+@override_output
 def create(
     name: str,
     description: Optional[str] = None,
@@ -16,6 +18,7 @@ def create(
     metadata: Optional[str] = None,
     redirect_url: Optional[str] = None,
     custom_fields: Optional[str] = None,
+data_only: bool = False,
 ):
     if custom_fields:
         custom_fields = parse_cli_string(
@@ -40,12 +43,15 @@ def create(
 
 
 @payment_page_app.command()
+@colorized_print
+@override_output
 def update(
     id_or_slug: str,
     name: str,
     description: str,
     amount: int,
     active: Optional[bool] = None,
+data_only: bool = False,
 ):
     return get_paystack_wrapper().payment_pages.update(
         id_or_slug=id_or_slug,
@@ -57,16 +63,21 @@ def update(
 
 
 @payment_page_app.command()
-def get_page(id_or_slug: str):
+@colorized_print
+@override_output
+def get_page(id_or_slug: str,data_only: bool = False,):
     return get_paystack_wrapper().payment_pages.get_page(id_or_slug=id_or_slug)
 
 
 @payment_page_app.command()
+@colorized_print
+@override_output
 def get_pages(
     page: int = 1,
     pagination: int = 50,
     start_date: Optional[str] = None,
     end_date: Optional[str] = None,
+data_only: bool = False,
 ):
     return get_paystack_wrapper().payment_pages.get_pages(
         page=page, pagination=pagination, start_date=start_date, end_date=end_date
@@ -74,10 +85,14 @@ def get_pages(
 
 
 @payment_page_app.command()
-def add_products(id: str, products: list[str]):
+@colorized_print
+@override_output
+def add_products(id: str, products: list[str],data_only: bool = False,):
     return get_paystack_wrapper().payment_pages.add_products(id=id, products=products)
 
 
 @payment_page_app.command()
-def check_slug_available(slug: str):
+@colorized_print
+@override_output
+def check_slug_available(slug: str,data_only: bool = False,):
     return get_paystack_wrapper().payment_pages.check_slug_available(slug=slug)

@@ -3,18 +3,21 @@ from typing import Optional
 from pypaystack2 import Currency
 from typer import Typer
 
-from paystack_cli.utils import get_paystack_wrapper
+from paystack_cli.utils import get_paystack_wrapper, override_output, colorized_print
 
 refund_app = Typer()
 
 
 @refund_app.command()
+@colorized_print
+@override_output
 def create(
     transaction: str,
     amount: Optional[int] = None,
     currency: Optional[Currency] = None,
     customer_note: Optional[str] = None,
     merchant_note: Optional[str] = None,
+    data_only: bool = False,
 ):
     return get_paystack_wrapper().refunds.create(
         transaction=transaction,
@@ -26,11 +29,15 @@ def create(
 
 
 @refund_app.command()
-def get_refund(reference: str):
+@colorized_print
+@override_output
+def get_refund(reference: str, data_only: bool = False):
     return get_paystack_wrapper().refunds.get_refund(reference=reference)
 
 
 @refund_app.command()
+@colorized_print
+@override_output
 def get_refunds(
     reference: Optional[str] = None,
     currency: Optional[Currency] = None,
@@ -38,6 +45,7 @@ def get_refunds(
     page: int = 1,
     start_date: Optional[str] = None,
     end_date: Optional[str] = None,
+    data_only: bool = False,
 ):
     return get_paystack_wrapper().refunds.get_refunds(
         reference=reference,

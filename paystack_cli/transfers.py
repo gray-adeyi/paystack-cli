@@ -3,12 +3,19 @@ from typing import Optional
 from pypaystack2 import TransferInstruction, Currency
 from typer import Typer
 
-from paystack_cli.utils import get_paystack_wrapper, parse_cli_string
+from paystack_cli.utils import (
+    get_paystack_wrapper,
+    parse_cli_string,
+    colorized_print,
+    override_output,
+)
 
 transfer_app = Typer()
 
 
 @transfer_app.command()
+@colorized_print
+@override_output
 def initiate(
     amount: int,
     recipient: str,
@@ -16,6 +23,7 @@ def initiate(
     currency: Optional[Currency] = None,
     reference: Optional[str] = None,
     source: str = "balance",
+    data_only: bool = False,
 ):
     return get_paystack_wrapper().transfers.initiate(
         amount=amount,
@@ -28,17 +36,22 @@ def initiate(
 
 
 @transfer_app.command()
-def get_transfer(id_or_code: str):
+@colorized_print
+@override_output
+def get_transfer(id_or_code: str, data_only: bool = False):
     return get_paystack_wrapper().transfers.get_transfer(id_or_code=id_or_code)
 
 
 @transfer_app.command()
+@colorized_print
+@override_output
 def get_transfers(
     page: int = 1,
     pagination: int = 50,
     customer: Optional[str] = None,
     start_date: Optional[str] = None,
     end_date: Optional[str] = None,
+    data_only: bool = False,
 ):
     return get_paystack_wrapper().transfers.get_transfers(
         page=page,
@@ -50,19 +63,25 @@ def get_transfers(
 
 
 @transfer_app.command()
-def verify(reference: str):
+@colorized_print
+@override_output
+def verify(reference: str, data_only: bool = False):
     return get_paystack_wrapper().transfers.verify(reference=reference)
 
 
 @transfer_app.command()
-def finalize(transfer_code: str, otp: str):
+@colorized_print
+@override_output
+def finalize(transfer_code: str, otp: str, data_only: bool = False):
     return get_paystack_wrapper().transfers.finalize(
         transfer_code=transfer_code, otp=otp
     )
 
 
 @transfer_app.command()
-def bulk_transfer(transfers: str, source="balance"):
+@colorized_print
+@override_output
+def bulk_transfer(transfers: str, source="balance", data_only: bool = False):
     transfers = parse_cli_string(
         raw_string=transfers,
         arg_or_option_name="transfers",

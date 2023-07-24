@@ -3,12 +3,19 @@ from typing import Optional
 from pypaystack2 import Status, Currency, LineItem, Tax
 from typer import Typer
 
-from paystack_cli.utils import get_paystack_wrapper, parse_cli_string
+from paystack_cli.utils import (
+    get_paystack_wrapper,
+    parse_cli_string,
+    override_output,
+    colorized_print,
+)
 
 payment_request_app = Typer()
 
 
 @payment_request_app.command()
+@colorized_print
+@override_output
 def create(
     customer: str,
     amount: int,
@@ -22,6 +29,7 @@ def create(
     has_invoice: Optional[bool] = None,
     invoice_number: Optional[int] = None,
     split_code: Optional[str] = None,
+    data_only: bool = False,
 ):
     if line_items:
         line_items = parse_cli_string(
@@ -51,6 +59,8 @@ def create(
 
 
 @payment_request_app.command()
+@colorized_print
+@override_output
 def update(
     customer: Optional[str] = None,
     status: Optional[Status] = None,
@@ -60,6 +70,7 @@ def update(
     pagination: int = 50,
     start_date: Optional[str] = None,
     end_date: Optional[str] = None,
+    data_only: bool = False,
 ):
     return get_paystack_wrapper().payment_requests.update(
         customer=customer,
@@ -74,13 +85,17 @@ def update(
 
 
 @payment_request_app.command()
-def get_payment_request(id_or_code: str):
+@colorized_print
+@override_output
+def get_payment_request(id_or_code: str, data_only: bool = False):
     return get_paystack_wrapper().payment_requests.get_payment_request(
         id_or_code=id_or_code
     )
 
 
 @payment_request_app.command()
+@colorized_print
+@override_output
 def get_payment_requests(
     customer: Optional[str] = None,
     status: Optional[Status] = None,
@@ -90,6 +105,7 @@ def get_payment_requests(
     pagination: int = 50,
     start_date: Optional[str] = None,
     end_date: Optional[str] = None,
+    data_only: bool = False,
 ):
     return get_paystack_wrapper().payment_requests.get_payment_requests(
         customer=customer,
@@ -104,20 +120,28 @@ def get_payment_requests(
 
 
 @payment_request_app.command()
-def verify(code: str):
+@colorized_print
+@override_output
+def verify(code: str, data_only: bool = False):
     return get_paystack_wrapper().payment_requests.verify(code=code)
 
 
 @payment_request_app.command()
-def archive(id_or_code: str):
+@colorized_print
+@override_output
+def archive(id_or_code: str, data_only: bool = False):
     return get_paystack_wrapper().payment_requests.archive(id_or_code=id_or_code)
 
 
 @payment_request_app.command()
-def finanlize(id_or_code: str):
+@colorized_print
+@override_output
+def finalize(id_or_code: str, data_only: bool = False):
     return get_paystack_wrapper().payment_requests.finalize(id_or_code=id_or_code)
 
 
 @payment_request_app.command()
-def get_total():
+@colorized_print
+@override_output
+def get_total(data_only: bool = False):
     return get_paystack_wrapper().payment_requests.get_total()

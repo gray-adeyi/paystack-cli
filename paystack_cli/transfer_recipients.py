@@ -3,12 +3,19 @@ from typing import Optional
 from pypaystack2 import Recipient, Currency, RecipientType
 from typer import Typer
 
-from paystack_cli.utils import get_paystack_wrapper, parse_cli_string
+from paystack_cli.utils import (
+    get_paystack_wrapper,
+    parse_cli_string,
+    override_output,
+    colorized_print,
+)
 
 transfer_recipient_app = Typer()
 
 
 @transfer_recipient_app.command()
+@colorized_print
+@override_output
 def create(
     type: RecipientType,
     name: str,
@@ -18,6 +25,7 @@ def create(
     currency: Optional[Currency] = None,
     auth_code: Optional[str] = None,
     metadata: Optional[str] = None,
+    data_only: bool = False,
 ):
     if metadata:
         metadata = parse_cli_string(
@@ -36,25 +44,34 @@ def create(
 
 
 @transfer_recipient_app.command()
-def update(id_or_code: str, name: str, email: Optional[str] = None):
+@colorized_print
+@override_output
+def update(
+    id_or_code: str, name: str, email: Optional[str] = None, data_only: bool = False
+):
     return get_paystack_wrapper().transfer_recipients.update(
         id_or_code=id_or_code, name=name, email=email
     )
 
 
 @transfer_recipient_app.command()
-def get_transfer_recipient(id_or_code: str):
+@colorized_print
+@override_output
+def get_transfer_recipient(id_or_code: str, data_only: bool = False):
     return get_paystack_wrapper().transfer_recipients.get_transfer_recipient(
         id_or_code=id_or_code
     )
 
 
 @transfer_recipient_app.command()
+@colorized_print
+@override_output
 def get_transfer_recipients(
     page: int = 1,
     pagination: int = 50,
     start_date: Optional[str] = None,
     end_date: Optional[str] = None,
+    data_only: bool = False,
 ):
     return get_paystack_wrapper().transfer_recipients.get_transfer_recipients(
         page=page, pagination=pagination, start_date=start_date, end_date=end_date
@@ -62,7 +79,9 @@ def get_transfer_recipients(
 
 
 @transfer_recipient_app.command()
-def bulk_create(batch: str):
+@colorized_print
+@override_output
+def bulk_create(batch: str, data_only: bool = False):
     batch = parse_cli_string(
         raw_string=batch, arg_or_option_name="batch", expected_type=Recipient, many=True
     )
@@ -70,5 +89,7 @@ def bulk_create(batch: str):
 
 
 @transfer_recipient_app.command()
-def delete(id_or_code: str):
+@colorized_print
+@override_output
+def delete(id_or_code: str, data_only: bool = False):
     return get_paystack_wrapper().transfer_recipients.delete(id_or_code=id_or_code)

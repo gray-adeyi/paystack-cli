@@ -1,3 +1,4 @@
+import functools
 import json
 import os.path
 from pathlib import Path
@@ -90,3 +91,23 @@ def parse_cli_string(
             f" that can be parsed into a {'`list` of ' if many else  ''}`{expected_type.__name__}`"
         )
         raise typer.Abort()
+
+
+def colorized_print(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        response = func(*args, **kwargs)
+        rprint(response)
+
+    return wrapper
+
+
+def override_output(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        response = func(*args, **kwargs)
+        if kwargs["data_only"]:
+            return response.data
+        return response
+
+    return wrapper

@@ -2,17 +2,20 @@ from typing import Optional
 
 from typer import Typer
 
-from paystack_cli.utils import get_paystack_wrapper
+from paystack_cli.utils import get_paystack_wrapper, override_output, colorized_print
 
 subscription_app = Typer()
 
 
 @subscription_app.command()
+@colorized_print
+@override_output
 def create(
     customer: str,
     plan: str,
     authorization: Optional[str] = None,
     start_date: Optional[str] = None,
+    data_only: bool = False,
 ):
     return get_paystack_wrapper().subscriptions.create(
         customer=customer,
@@ -23,16 +26,21 @@ def create(
 
 
 @subscription_app.command()
-def get_subscription(id_or_code: str):
+@colorized_print
+@override_output
+def get_subscription(id_or_code: str, data_only: bool = False):
     return get_paystack_wrapper().subscriptions.get_subscription(id_or_code=id_or_code)
 
 
 @subscription_app.command()
+@colorized_print
+@override_output
 def get_subscriptions(
     page: int = 1,
     pagination: int = 50,
     customer: Optional[int] = None,
     plan: Optional[int] = None,
+    data_only: bool = False,
 ):
     return get_paystack_wrapper().subscriptions.get_subscriptions(
         page=page, pagination=pagination, customer=customer, plan=plan
@@ -40,20 +48,28 @@ def get_subscriptions(
 
 
 @subscription_app.command()
-def get_update_link(code: str):
+@colorized_print
+@override_output
+def get_update_link(code: str, data_only: bool = False):
     return get_paystack_wrapper().subscriptions.get_update_link(code=code)
 
 
 @subscription_app.command()
-def send_update_link(code: str):
+@colorized_print
+@override_output
+def send_update_link(code: str, data_only: bool = False):
     return get_paystack_wrapper().subscriptions.send_update_link(code=code)
 
 
 @subscription_app.command()
-def enable(code: str, token: str):
+@colorized_print
+@override_output
+def enable(code: str, token: str, data_only: bool = False):
     return get_paystack_wrapper().subscriptions.enable(code=code, token=token)
 
 
 @subscription_app.command()
-def disable(code: str, token: str):
+@colorized_print
+@override_output
+def disable(code: str, token: str, data_only: bool = False):
     return get_paystack_wrapper().subscriptions.disable(code=code, token=token)

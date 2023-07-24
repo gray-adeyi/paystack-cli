@@ -3,12 +3,14 @@ from typing import Optional
 from pypaystack2 import Interval, Currency
 from typer import Typer
 
-from paystack_cli.utils import get_paystack_wrapper
+from paystack_cli.utils import get_paystack_wrapper, override_output, colorized_print
 
 plan_app = Typer()
 
 
 @plan_app.command()
+@colorized_print
+@override_output
 def create(
     name: str,
     amount: int,
@@ -18,6 +20,7 @@ def create(
     invoice_limit: Optional[int] = None,
     send_invoices: bool = False,
     send_sms: bool = False,
+    data_only: bool = False,
 ):
     return get_paystack_wrapper().plans.create(
         name=name,
@@ -32,6 +35,8 @@ def create(
 
 
 @plan_app.command()
+@colorized_print
+@override_output
 def update(
     id_or_code: str,
     name: Optional[str],
@@ -42,6 +47,7 @@ def update(
     invoice_limit: Optional[int] = None,
     send_invoices: bool = False,
     send_sms: bool = False,
+    data_only: bool = False,
 ):
     return get_paystack_wrapper().plans.update(
         id_or_code=id_or_code,
@@ -57,10 +63,14 @@ def update(
 
 
 @plan_app.command()
-def get_plan(id_or_code: str):
+@colorized_print
+@override_output
+def get_plan(id_or_code: str, data_only: bool = False):
     return get_paystack_wrapper().plans.get_plan(id_or_code=id_or_code)
 
 
 @plan_app.command()
-def get_plans(id_or_code: str):
+@colorized_print
+@override_output
+def get_plans(id_or_code: str, data_only: bool = False):
     return get_paystack_wrapper().plans.get_plans(id_or_code=id_or_code)

@@ -4,17 +4,26 @@ from typing import Optional
 from pypaystack2 import TransactionStatus, Currency, Channel, Bearer
 from typer import Typer
 
-from paystack_cli.utils import get_paystack_wrapper, parse_cli_string
+from paystack_cli.utils import (
+    get_paystack_wrapper,
+    parse_cli_string,
+    override_output,
+    colorized_print,
+)
 
 transaction_app = Typer()
 
 
 @transaction_app.command()
-def get_txn(id: str):
+@colorized_print
+@override_output
+def get_txn(id: str, data_only: bool = False):
     return get_paystack_wrapper().transactions.get_transaction(id=id)
 
 
 @transaction_app.command()
+@colorized_print
+@override_output
 def get_txns(
     customer_id: Optional[str] = None,
     start_date: Optional[str] = None,
@@ -23,6 +32,7 @@ def get_txns(
     page: Optional[int] = None,
     amount: Optional[int] = None,
     pagination: int = 50,
+    data_only: bool = False,
 ):
     return get_paystack_wrapper().transactions.get_transactions(
         customer=customer_id,
@@ -36,11 +46,15 @@ def get_txns(
 
 
 @transaction_app.command()
-def get_timeline(id_or_ref: str):
+@colorized_print
+@override_output
+def get_timeline(id_or_ref: str, data_only: bool = False):
     return get_paystack_wrapper().transactions.get_timeline(id_or_ref=id_or_ref)
 
 
 @transaction_app.command()
+@colorized_print
+@override_output
 def charge(
     amount: int,
     email: str,
@@ -53,6 +67,7 @@ def charge(
     transaction_charge: Optional[int] = None,
     bearer: Optional[Bearer] = None,
     queue: bool = False,
+    data_only: bool = False,
 ):
     if metadata:
         metadata = parse_cli_string(
@@ -74,6 +89,8 @@ def charge(
 
 
 @transaction_app.command()
+@colorized_print
+@override_output
 def export(
     page: Optional[int] = None,
     start_date: Optional[str] = None,
@@ -86,6 +103,7 @@ def export(
     settlement_id: Optional[int] = None,
     payment_page: Optional[int] = None,
     pagination: int = 50,
+    data_only: bool = False,
 ):
     return get_paystack_wrapper().transactions.export(
         page=page,
@@ -103,6 +121,8 @@ def export(
 
 
 @transaction_app.command()
+@colorized_print
+@override_output
 def init(
     amount: int,
     email: str,
@@ -117,6 +137,7 @@ def init(
     subaccount: Optional[str] = None,
     transfer_charge: Optional[int] = None,
     bearer: Optional[Bearer] = None,
+    data_only: bool = False,
 ):
     if metadata:
         metadata = parse_cli_string(
@@ -140,6 +161,8 @@ def init(
 
 
 @transaction_app.command()
+@colorized_print
+@override_output
 def partial_debit(
     auth_code: str,
     currency: Currency,
@@ -147,6 +170,7 @@ def partial_debit(
     email: str,
     reference: Optional[str] = None,
     at_least: Optional[int] = None,
+    data_only: bool = False,
 ):
     get_paystack_wrapper().transactions.partial_debit(
         auth_code=auth_code,
@@ -159,11 +183,14 @@ def partial_debit(
 
 
 @transaction_app.command()
+@colorized_print
+@override_output
 def totals(
     page: Optional[int] = None,
     start_date: Optional[str] = None,
     end_date: Optional[str] = None,
     pagination: int = 50,
+    data_only: bool = False,
 ):
     get_paystack_wrapper().transactions.totals(
         page=page, start_date=start_date, end_date=end_date, pagination=pagination
@@ -171,5 +198,7 @@ def totals(
 
 
 @transaction_app.command()
-def verify(reference: str):
+@colorized_print
+@override_output
+def verify(reference: str, data_only: bool = False):
     get_paystack_wrapper().transactions.verify(reference=reference)

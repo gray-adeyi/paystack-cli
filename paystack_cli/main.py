@@ -1,8 +1,8 @@
 from typer import Typer
 from rich import print as rprint
 
-from charge import charge_app
-from miscellaneous import miscellaneous_app
+from paystack_cli.charge import charge_app
+from paystack_cli.miscellaneous import miscellaneous_app
 from paystack_cli.apple_pay import app_pay_app
 from paystack_cli.bulk_charges import bulk_charge_app
 from paystack_cli.customers import customer_app
@@ -34,7 +34,7 @@ app.add_typer(transaction_split_app, name="txn-split")
 app.add_typer(terminal_app, name="terminals")
 app.add_typer(customer_app, name="customers")
 app.add_typer(dva_app, name="dva")
-app.add_typer(app_pay_app, name="apple-pay")
+app.add_typer(app_pay_app, name="apple-pay", help="The apple-pay subcommand interacts with the Apple Pay API and allows you register your application's top-level domain or subdomain.")
 app.add_typer(subaccount_app, name="subacounts")
 app.add_typer(plan_app, name="plans")
 app.add_typer(subscription_app, name="subs")
@@ -45,7 +45,7 @@ app.add_typer(settlement_app, name="settlements")
 app.add_typer(transfer_recipient_app, name="tr")
 app.add_typer(transfer_app, name="transfers")
 app.add_typer(transfer_control_app, name="transfer-ctrl")
-app.add_typer(bulk_charge_app, name="bc")
+app.add_typer(bulk_charge_app, name="bc", help="The bc subcommand interacts with the Bulk Charges API and allows you to create and manage multiple recurring payments for your customers.")
 app.add_typer(integration_app, name="integration")
 app.add_typer(charge_app, name="charge")
 app.add_typer(dispute_app, name="disputes")
