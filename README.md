@@ -4,7 +4,7 @@ A command line app for interacting with [Paystack's](https://paystack.com/) API
 ![utility in use](./paystack-cli.png)
 
 ## Installation
-Binaries of paystack cli be found [here](). Alternatively, Paystack cli can be installed from pypi
+Binaries of paystack cli be found [here](https://github.com/gray-adeyi/kuda-cli/releases/tag/0.1.0). Alternatively, Paystack cli can be installed from pypi
 with pip as shown below.
 ```bash
 pip install paystack-cli
