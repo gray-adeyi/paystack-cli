@@ -69,8 +69,10 @@ app.add_typer(subscription_app, name="subs")
 app.add_typer(
     product_app,
     name="products",
-    help=("The `products` subcommand interacts with Products API"
-          " which allows you to create and manage inventories on your integration."),
+    help=(
+        "The `products` subcommand interacts with Products API"
+        " which allows you to create and manage inventories on your integration."
+    ),
 )
 app.add_typer(
     payment_page_app,
@@ -121,7 +123,14 @@ app.add_typer(
     name="disputes",
     help="The Disputes API allows you manage transaction disputes on your integration.",
 )
-app.add_typer(refund_app, name="refunds")
+app.add_typer(
+    refund_app,
+    name="refunds",
+    help=(
+        "The `refunds` subcommand interacts with Refunds API"
+        " which allows you to create and manage transaction refunds."
+    ),
+)
 app.add_typer(verification_app, name="verification")
 app.add_typer(
     miscellaneous_app,
