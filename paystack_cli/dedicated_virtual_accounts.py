@@ -11,6 +11,7 @@ dva_app = Typer()
 @colorized_print
 @override_output
 def get_dva(dedicated_account_id: int, data_only: bool = False):
+    """Get details of a dedicated virtual account on your integration."""
     return get_paystack_wrapper().dedicated_accounts.get_dedicated_account(
         dedicated_account_id=dedicated_account_id
     )
@@ -25,8 +26,9 @@ def get_dvas(
     provider_slug: Optional[str] = None,
     bank_id: Optional[str] = None,
     customer: Optional[str] = None,
-data_only: bool = False
+    data_only: bool = False,
 ):
+    """Fetches dedicated virtual accounts available on your integration."""
     return get_paystack_wrapper().dedicated_accounts.get_dedicated_accounts(
         active=active,
         currency=currency,
@@ -47,8 +49,9 @@ def create(
     first_name: Optional[str] = None,
     last_name: Optional[str] = None,
     phone: Optional[str] = None,
-data_only: bool = False
+    data_only: bool = False,
 ):
+    """Create a dedicated virtual account and assign to a customer"""
     return get_paystack_wrapper().dedicated_accounts.create(
         customer=customer,
         preferred_bank=preferred_bank,
@@ -64,6 +67,7 @@ data_only: bool = False
 @colorized_print
 @override_output
 def deactivate(dedicated_account_id: int, data_only: bool = False):
+    """Deactivate a dedicated virtual account on your integration."""
     return get_paystack_wrapper().dedicated_accounts.deactivate(
         dedicated_account_id=dedicated_account_id
     )
@@ -77,8 +81,9 @@ def split(
     subaccount: Optional[str] = None,
     split_code: Optional[str] = None,
     preferred_bank: Optional[str] = None,
-data_only: bool = False
+    data_only: bool = False,
 ):
+    """Split a dedicated virtual account transaction with one or more accounts"""
     return get_paystack_wrapper().dedicated_accounts.split(
         customer=customer,
         subaccount=subaccount,
@@ -91,6 +96,10 @@ data_only: bool = False
 @colorized_print
 @override_output
 def remove_split(account_number: str, data_only: bool = False):
+    """Removes a split.
+
+    If you've previously set up split payment for transactions on a
+    dedicated virtual account, you can remove it with this method."""
     return get_paystack_wrapper().dedicated_accounts.remove_split(
         account_number=account_number
     )
@@ -100,6 +109,7 @@ def remove_split(account_number: str, data_only: bool = False):
 @colorized_print
 @override_output
 def get_providers(data_only: bool = False):
+    """Get available bank providers for a dedicated virtual account"""
     return get_paystack_wrapper().dedicated_accounts.get_providers()
 
 
@@ -111,8 +121,9 @@ def requery(
     subaccount: Optional[str] = None,
     split_code: Optional[str] = None,
     preferred_bank: Optional[str] = None,
-data_only: bool = False
+    data_only: bool = False,
 ):
+    """Get details of a dedicated virtual account on your integration."""
     return get_paystack_wrapper().dedicated_accounts.requery(
         customer=customer,
         subaccount=subaccount,

@@ -25,7 +25,7 @@ def get_disputes(
     page: int = 1,
     transaction: Optional[str] = None,
     status: Optional[DisputeStatus] = None,
-data_only: bool = False
+    data_only: bool = False,
 ):
     return get_paystack_wrapper().disputes.get_disputes(
         start_date=start_date,
@@ -54,7 +54,7 @@ def resolve_dispute(
     refund_amount: int,
     uploaded_filename: str,
     evidence: Optional[int] = None,
-data_only: bool = False
+    data_only: bool = False,
 ):
     return get_paystack_wrapper().disputes.resolve_dispute(
         id=id,
@@ -76,7 +76,7 @@ def export_disputes(
     page: int = 1,
     transaction: Optional[str] = None,
     status: Optional[DisputeStatus] = None,
-data_only: bool = False
+    data_only: bool = False,
 ):
     return get_paystack_wrapper().disputes.export_disputes(
         start_date=start_date,
@@ -99,7 +99,7 @@ def add_evidence(
     service_details: str,
     delivery_address: Optional[str] = None,
     delivery_date: Optional[str] = None,
-data_only: bool = False
+    data_only: bool = False,
 ):
     return get_paystack_wrapper().disputes.add_evidence(
         id=id,
@@ -124,7 +124,12 @@ def get_upload_url(id: str, upload_filename: str, data_only: bool = False):
 @dispute_app.command()
 @colorized_print
 @override_output
-def update_dispute(id: str, refund_amount: int, uploaded_filename: Optional[str], data_only: bool = False):
+def update_dispute(
+    id: str,
+    refund_amount: int,
+    uploaded_filename: Optional[str],
+    data_only: bool = False,
+):
     return get_paystack_wrapper().disputes.update_dispute(
         id=id, refund_amount=refund_amount, uploaded_filename=uploaded_filename
     )

@@ -2,7 +2,12 @@ from typing import Optional
 
 from typer import Typer
 
-from paystack_cli.utils import get_paystack_wrapper, parse_cli_string, colorized_print, override_output
+from paystack_cli.utils import (
+    get_paystack_wrapper,
+    parse_cli_string,
+    colorized_print,
+    override_output,
+)
 
 charge_app = Typer()
 
@@ -22,7 +27,7 @@ def charge(
     mobile_money: Optional[str] = None,
     device_id: Optional[str] = None,
     birthday: Optional[str] = None,
-        data_only: bool = False
+    data_only: bool = False,
 ):
     """Initiate a payment by integrating the payment channel of your choice."""
     if bank:
@@ -88,7 +93,14 @@ def submit_pin(pin: str, reference: str, data_only: bool = False):
 @charge_app.command()
 @colorized_print
 @override_output
-def set_address(address: str, reference: str, city: str, state: str, zipcode: str, data_only: bool = False):
+def set_address(
+    address: str,
+    reference: str,
+    city: str,
+    state: str,
+    zipcode: str,
+    data_only: bool = False,
+):
     """Submit address to continue a charge"""
     return get_paystack_wrapper().charge.set_address(
         address=address, reference=reference, city=city, state=state, zipcode=zipcode

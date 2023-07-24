@@ -3,7 +3,12 @@ from typing import Optional
 from pypaystack2 import RiskAction, Identification, Country
 from typer import Typer
 
-from paystack_cli.utils import get_paystack_wrapper, parse_cli_string, override_output, colorized_print
+from paystack_cli.utils import (
+    get_paystack_wrapper,
+    parse_cli_string,
+    override_output,
+    colorized_print,
+)
 
 customer_app = Typer()
 
@@ -24,7 +29,7 @@ def get_customers(
     end_date: Optional[str] = None,
     page: int = 1,
     pagination: int = 50,
-data_only: bool = False
+    data_only: bool = False,
 ):
     """Fetches customers available on your integration"""
     return get_paystack_wrapper().customers.get_customers(
@@ -41,7 +46,7 @@ def create(
     last_name: Optional[str] = None,
     phone: Optional[str] = None,
     metadata: Optional[str] = None,
-data_only: bool = False
+    data_only: bool = False,
 ):
     """Fetches customers available on your integration."""
     if metadata:
@@ -66,7 +71,7 @@ def update(
     last_name: Optional[str] = None,
     phone: Optional[str] = None,
     metadata: Optional[str] = None,
-data_only: bool = False
+    data_only: bool = False,
 ):
     """Update a customer's details on your integration"""
     if metadata:
@@ -85,7 +90,9 @@ data_only: bool = False
 @customer_app.command()
 @colorized_print
 @override_output
-def flag(customer: str, risk_action: Optional[RiskAction] = None, data_only: bool = False):
+def flag(
+    customer: str, risk_action: Optional[RiskAction] = None, data_only: bool = False
+):
     """Whitelist or blacklist a customer on your integration"""
     return get_paystack_wrapper().customers.flag(
         customer=customer, risk_action=risk_action
@@ -114,7 +121,7 @@ def validate(
     bank_code: Optional[str] = None,
     account_number: Optional[str] = None,
     middle_name: Optional[str] = None,
-data_only: bool = False
+    data_only: bool = False,
 ):
     """Validate a customer's identity"""
     return get_paystack_wrapper().customers.validate(

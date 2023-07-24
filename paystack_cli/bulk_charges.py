@@ -3,7 +3,12 @@ from typing import Optional
 from pypaystack2 import Status, BulkChargeInstruction
 from typer import Typer
 
-from paystack_cli.utils import get_paystack_wrapper, parse_cli_string, override_output, colorized_print
+from paystack_cli.utils import (
+    get_paystack_wrapper,
+    parse_cli_string,
+    override_output,
+    colorized_print,
+)
 
 bulk_charge_app = Typer()
 
@@ -47,7 +52,7 @@ def get_batches(
     pagination: int = 50,
     start_date: Optional[str] = None,
     end_date: Optional[str] = None,
-data_only: bool = False
+    data_only: bool = False,
 ):
     """This gets all bulk charge batches created by the integration."""
     return get_paystack_wrapper().bulk_charges.get_batches(
@@ -65,7 +70,7 @@ def get_charges_in_batch(
     page: int = 1,
     start_date: Optional[str] = None,
     end_date: Optional[str] = None,
-data_only: bool = False
+    data_only: bool = False,
 ):
     """This command retrieves the charges associated with a specified batch code. Pagination parameters are available.
 
