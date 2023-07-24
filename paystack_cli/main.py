@@ -60,10 +60,12 @@ app.add_typer(
 app.add_typer(
     subaccount_app,
     name="subacounts",
-    help=("The `subacounts` subcommand interacts with Subaccounts API which "
-          "allows you to create and manage subaccounts on your integration. "
-          "Subaccounts can be used to split payment between two accounts (your"
-          " main account and a sub account)."),
+    help=(
+        "The `subacounts` subcommand interacts with Subaccounts API which "
+        "allows you to create and manage subaccounts on your integration. "
+        "Subaccounts can be used to split payment between two accounts (your"
+        " main account and a sub account)."
+    ),
 )
 app.add_typer(
     plan_app,
@@ -73,7 +75,14 @@ app.add_typer(
         " you to create and manage installment payment options on your integration."
     ),
 )
-app.add_typer(subscription_app, name="subs")
+app.add_typer(
+    subscription_app,
+    name="subs",
+    help=(
+        "The `subs` subcommand interacts with Subscriptions API "
+        "which allows you to create and manage recurring payment on your integration."
+    ),
+)
 app.add_typer(
     product_app,
     name="products",
