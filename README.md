@@ -17,3 +17,6 @@ paystack config AUTH_KEY
 ```
 This sets up your paystack cli for use in development mode if the test secret key is used. This auth_key can be
 removed with `paystack reset`. Run `paystack --help` to see available commands
+
+## Source code
+[https://github.com/gray-adeyi/paystack-cli](https://github.com/gray-adeyi/paystack-cli)
