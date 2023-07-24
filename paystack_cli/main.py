@@ -32,7 +32,14 @@ app = Typer(
 
 app.add_typer(transaction_app, name="txn")
 app.add_typer(transaction_split_app, name="txn-split")
-app.add_typer(terminal_app, name="terminals")
+app.add_typer(
+    terminal_app,
+    name="terminals",
+    help=(
+        "The `terminals` subcommand interacts with Terminal API"
+        " which allows you to build delightful in-person payment experiences."
+    ),
+)
 app.add_typer(
     customer_app,
     name="customers",
