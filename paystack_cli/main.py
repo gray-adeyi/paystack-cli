@@ -38,7 +38,15 @@ app.add_typer(
         " which allows you to create and manage payments on your integration."
     ),
 )
-app.add_typer(transaction_split_app, name="txn-split")
+app.add_typer(
+    transaction_split_app,
+    name="splits",
+    help=(
+        "The `splits` subcommand interacts with the Transaction Splits API"
+        " which enables merchants split the settlement for a transaction"
+        " across their payout account, and one or more Subaccounts."
+    ),
+)
 app.add_typer(
     terminal_app,
     name="terminals",

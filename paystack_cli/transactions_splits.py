@@ -32,6 +32,7 @@ def get_splits(
     pagination: int = 50,
     data_only: bool = False,
 ):
+    """Get/search for the transaction splits available on your integration."""
     return get_paystack_wrapper().splits.get_splits(
         name=name,
         sort_by=sort_by,
@@ -55,6 +56,7 @@ def create(
     bearer_subaccount: str,
     data_only: bool = False,
 ):
+    """Create a split payment on your integration"""
     subaccounts = parse_cli_string(
         raw_string=subaccounts,
         arg_or_option_name="subaccounts",
@@ -82,6 +84,7 @@ def update(
     bearer_subaccount: Optional[str],
     data_only: bool = False,
 ):
+    """Update a transaction split details on your integration"""
     return get_paystack_wrapper().splits.update(
         id=id,
         name=name,
@@ -95,6 +98,7 @@ def update(
 @colorized_print
 @override_output
 def remove(id: str, subaccount: str, data_only: bool = False):
+    """Remove a subaccount from a transaction split"""
     return get_paystack_wrapper().splits.remove(id=id, subaccount=subaccount)
 
 
@@ -102,6 +106,7 @@ def remove(id: str, subaccount: str, data_only: bool = False):
 @colorized_print
 @override_output
 def add_or_update(id: str, subaccount: str, share: str, data_only: bool = False):
+    """Add a Subaccount to a Transaction Split, or update the share of an existing Subaccount in a Transaction Split"""
     return get_paystack_wrapper().splits.add_or_update(
         id=id, subaccount=subaccount, share=share
     )
