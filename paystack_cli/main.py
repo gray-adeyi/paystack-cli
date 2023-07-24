@@ -215,18 +215,21 @@ app.add_typer(
 
 @app.command()
 def config(auth_key: str):
+    """Configure auth key"""
     update_settings(option="auth_key", value=auth_key)
     rprint("auth key saved! :boom:")
 
 
 @app.command()
 def reset():
+    """Reset auth key"""
     reset_settings()
     rprint("auth key cleared! :boom:")
 
 
 @app.command()
 def version():
+    """See CLI version"""
     rprint("Paystack CLI Version 0.1.0")
 
 
