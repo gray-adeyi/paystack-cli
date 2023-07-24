@@ -20,6 +20,7 @@ def create(
     quantity: Optional[int] = None,
     data_only: bool = False,
 ):
+    """Create a product on your integration"""
     return get_paystack_wrapper().products.create(
         name=name,
         description=description,
@@ -43,6 +44,7 @@ def update(
     quantity: Optional[int] = None,
     data_only: bool = False,
 ):
+    """Update a product details on your integration"""
     return get_paystack_wrapper().products.update(
         id=id,
         name=name,
@@ -58,6 +60,7 @@ def update(
 @colorized_print
 @override_output
 def get_product(id: str, data_only: bool = False):
+    """Get details of a product on your integration."""
     return get_paystack_wrapper().products.get_product(id=id)
 
 
@@ -71,6 +74,7 @@ def get_products(
     end_date: Optional[str] = None,
     data_only: bool = False,
 ):
+    """Fetches products available on your integration."""
     return get_paystack_wrapper().products.get_products(
         page=page, pagination=pagination, start_date=start_date, end_date=end_date
     )

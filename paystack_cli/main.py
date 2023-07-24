@@ -60,11 +60,18 @@ app.add_typer(subaccount_app, name="subacounts")
 app.add_typer(
     plan_app,
     name="plans",
-    help=("The `plans` subcommand interacts with Plans API which allows"
-          " you to create and manage installment payment options on your integration."),
+    help=(
+        "The `plans` subcommand interacts with Plans API which allows"
+        " you to create and manage installment payment options on your integration."
+    ),
 )
 app.add_typer(subscription_app, name="subs")
-app.add_typer(product_app, name="products")
+app.add_typer(
+    product_app,
+    name="products",
+    help=("The `products` subcommand interacts with Products API"
+          " which allows you to create and manage inventories on your integration."),
+)
 app.add_typer(
     payment_page_app,
     name="pp",
