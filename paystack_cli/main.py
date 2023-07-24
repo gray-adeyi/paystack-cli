@@ -29,6 +29,7 @@ from paystack_cli.verification import verification_app
 app = Typer(
     name="Paystack", help="A command line utility for interacting with Paystack's API"
 )
+
 app.add_typer(transaction_app, name="txn")
 app.add_typer(transaction_split_app, name="txn-split")
 app.add_typer(terminal_app, name="terminals")
@@ -56,7 +57,14 @@ app.add_typer(
         "and allows you register your application's top-level domain or subdomain."
     ),
 )
-app.add_typer(subaccount_app, name="subacounts")
+app.add_typer(
+    subaccount_app,
+    name="subacounts",
+    help=("The `subacounts` subcommand interacts with Subaccounts API which "
+          "allows you to create and manage subaccounts on your integration. "
+          "Subaccounts can be used to split payment between two accounts (your"
+          " main account and a sub account)."),
+)
 app.add_typer(
     plan_app,
     name="plans",
@@ -93,8 +101,10 @@ app.add_typer(
 app.add_typer(
     settlement_app,
     name="settlements",
-    help=("The `settlements` subcommand interacts with the Settlements API"
-          " which allows you gain insights into payouts made by Paystack to your bank account."),
+    help=(
+        "The `settlements` subcommand interacts with the Settlements API"
+        " which allows you gain insights into payouts made by Paystack to your bank account."
+    ),
 )
 app.add_typer(transfer_recipient_app, name="tr")
 app.add_typer(transfer_app, name="transfers")

@@ -28,6 +28,7 @@ def create(
     metadata: Optional[str] = None,
     data_only: bool = False,
 ):
+    """Create a subacount on your integration."""
     if metadata:
         metadata = parse_cli_string(
             raw_string=metadata, arg_or_option_name="metadata", expected_type=dict
@@ -63,6 +64,7 @@ def update(
     metadata: Optional[str] = None,
     data_only: bool = False,
 ):
+    """Update a subaccount details on your integration."""
     if metadata:
         metadata = parse_cli_string(
             raw_string=metadata, arg_or_option_name="metadata", expected_type=dict
@@ -87,6 +89,7 @@ def update(
 @colorized_print
 @override_output
 def get_subaccount(id_or_code: str, data_only: bool = False):
+    """Get details of a subaccount on your integration."""
     return get_paystack_wrapper().subaccounts.get_subaccount(id_or_code=id_or_code)
 
 
@@ -100,6 +103,7 @@ def get_subaccounts(
     pagination: int = 50,
     data_only: bool = False,
 ):
+    """Fetch subaccounts available on your integration."""
     return get_paystack_wrapper().subaccounts.get_subaccounts(
         start_date=start_date, end_date=end_date, page=page, pagination=pagination
     )
