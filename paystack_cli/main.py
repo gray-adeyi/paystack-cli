@@ -156,8 +156,10 @@ app.add_typer(
 app.add_typer(
     transfer_control_app,
     name="transfer-ctrl",
-    help=("The `transfer-ctrl` subcommand interacts with Transfers Control API"
-          " which allows you to manage settings of your transfers."),
+    help=(
+        "The `transfer-ctrl` subcommand interacts with Transfers Control API"
+        " which allows you to manage settings of your transfers."
+    ),
 )
 app.add_typer(
     bulk_charge_app,
@@ -196,7 +198,11 @@ app.add_typer(
         " which allows you to create and manage transaction refunds."
     ),
 )
-app.add_typer(verification_app, name="verification")
+app.add_typer(
+    verification_app,
+    name="verification",
+    help="The `verification` subcommand interacts with Verification API which allows you to perform KYC processes.",
+)
 app.add_typer(
     miscellaneous_app,
     name="misc",
