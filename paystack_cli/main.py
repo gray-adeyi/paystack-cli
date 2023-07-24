@@ -35,17 +35,26 @@ app.add_typer(terminal_app, name="terminals")
 app.add_typer(
     customer_app,
     name="customers",
-    help="The `customers` subcommand interacts with Customers API and allows you to create and manage customers in your integration.",
+    help=(
+        "The `customers` subcommand interacts with Customers API "
+        "and allows you to create and manage customers in your integration."
+    ),
 )
 app.add_typer(
     dva_app,
     name="dva",
-    help="The `dva` subcommand interacts with Dedicated Virtual Account API enables Nigerian merchants to manage unique payment accounts of their customers.",
+    help=(
+        "The `dva` subcommand interacts with Dedicated Virtual Account "
+        "API enables Nigerian merchants to manage unique payment accounts of their customers."
+    ),
 )
 app.add_typer(
     app_pay_app,
     name="apple-pay",
-    help="The `apple-pay` subcommand interacts with the Apple Pay API and allows you register your application's top-level domain or subdomain.",
+    help=(
+        "The `apple-pay` subcommand interacts with the Apple Pay API "
+        "and allows you register your application's top-level domain or subdomain."
+    ),
 )
 app.add_typer(subaccount_app, name="subacounts")
 app.add_typer(plan_app, name="plans")
@@ -60,15 +69,25 @@ app.add_typer(transfer_control_app, name="transfer-ctrl")
 app.add_typer(
     bulk_charge_app,
     name="bc",
-    help="The `bc` subcommand interacts with the Bulk Charges API and allows you to create and manage multiple recurring payments for your customers.",
+    help=(
+        "The `bc` subcommand interacts with the Bulk Charges API and "
+        "allows you to create and manage multiple recurring payments for your customers."
+    ),
 )
 app.add_typer(integration_app, name="integration")
 app.add_typer(
     charge_app,
     name="charge",
-    help="The `charge` subcommand interacts with Charge API allows and you to configure a payment channel of your choice when initiating a payment.",
+    help=(
+        "The `charge` subcommand interacts with Charge API allows and "
+        "you to configure a payment channel of your choice when initiating a payment."
+    ),
 )
-app.add_typer(dispute_app, name="disputes")
+app.add_typer(
+    dispute_app,
+    name="disputes",
+    help="The Disputes API allows you manage transaction disputes on your integration.",
+)
 app.add_typer(refund_app, name="refunds")
 app.add_typer(verification_app, name="verification")
 app.add_typer(miscellaneous_app, name="misc")
