@@ -74,7 +74,12 @@ app.add_typer(
         "allows you to create and manage multiple recurring payments for your customers."
     ),
 )
-app.add_typer(integration_app, name="integration")
+app.add_typer(
+    integration_app,
+    name="integration",
+    help=("The `integration` subcommand interacts with Integration API"
+          " and allows you to manage some settings on your integration."),
+)
 app.add_typer(
     charge_app,
     name="charge",
