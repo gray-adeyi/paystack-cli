@@ -27,6 +27,7 @@ def create(
     metadata: Optional[str] = None,
     data_only: bool = False,
 ):
+    """Creates a new recipient. A duplicate account number will lead to the retrieval of the existing record."""
     if metadata:
         metadata = parse_cli_string(
             raw_string=metadata, arg_or_option_name="metadata", expected_type=dict
@@ -49,6 +50,7 @@ def create(
 def update(
     id_or_code: str, name: str, email: Optional[str] = None, data_only: bool = False
 ):
+    """Update an existing recipient. An duplicate account number will lead to the retrieval of the existing record."""
     return get_paystack_wrapper().transfer_recipients.update(
         id_or_code=id_or_code, name=name, email=email
     )
@@ -58,6 +60,7 @@ def update(
 @colorized_print
 @override_output
 def get_transfer_recipient(id_or_code: str, data_only: bool = False):
+    """Fetch the details of a transfer recipient"""
     return get_paystack_wrapper().transfer_recipients.get_transfer_recipient(
         id_or_code=id_or_code
     )
@@ -73,6 +76,7 @@ def get_transfer_recipients(
     end_date: Optional[str] = None,
     data_only: bool = False,
 ):
+    """Fetch transfer recipients available on your integration"""
     return get_paystack_wrapper().transfer_recipients.get_transfer_recipients(
         page=page, pagination=pagination, start_date=start_date, end_date=end_date
     )
@@ -82,6 +86,9 @@ def get_transfer_recipients(
 @colorized_print
 @override_output
 def bulk_create(batch: str, data_only: bool = False):
+    """Create multiple transfer recipients in batches.
+
+    A duplicate account number will lead to the retrieval of the existing record."""
     batch = parse_cli_string(
         raw_string=batch, arg_or_option_name="batch", expected_type=Recipient, many=True
     )
@@ -92,4 +99,5 @@ def bulk_create(batch: str, data_only: bool = False):
 @colorized_print
 @override_output
 def delete(id_or_code: str, data_only: bool = False):
+    """Deletes a transfer recipient (sets the transfer recipient to inactive)"""
     return get_paystack_wrapper().transfer_recipients.delete(id_or_code=id_or_code)
