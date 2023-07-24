@@ -30,7 +30,14 @@ app = Typer(
     name="Paystack", help="A command line utility for interacting with Paystack's API"
 )
 
-app.add_typer(transaction_app, name="txn")
+app.add_typer(
+    transaction_app,
+    name="txn",
+    help=(
+        "The `txn` subcommand interacts with the Transactions API"
+        " which allows you to create and manage payments on your integration."
+    ),
+)
 app.add_typer(transaction_split_app, name="txn-split")
 app.add_typer(
     terminal_app,
