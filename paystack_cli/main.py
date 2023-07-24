@@ -60,7 +60,14 @@ app.add_typer(subaccount_app, name="subacounts")
 app.add_typer(plan_app, name="plans")
 app.add_typer(subscription_app, name="subs")
 app.add_typer(product_app, name="products")
-app.add_typer(payment_page_app, name="pp")
+app.add_typer(
+    payment_page_app,
+    name="pp",
+    help=(
+        "The `pp` subcommand interacts with Payment Pages API"
+        " and provides a quick and secure way to collect payment for products."
+    ),
+)
 app.add_typer(payment_request_app, name="pr")
 app.add_typer(settlement_app, name="settlements")
 app.add_typer(transfer_recipient_app, name="tr")

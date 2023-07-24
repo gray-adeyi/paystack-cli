@@ -87,6 +87,7 @@ def get_pages(
     end_date: Optional[str] = None,
     data_only: bool = False,
 ):
+    """Fetch payment pages available on your integration."""
     return get_paystack_wrapper().payment_pages.get_pages(
         page=page, pagination=pagination, start_date=start_date, end_date=end_date
     )
@@ -100,6 +101,7 @@ def add_products(
     products: list[str],
     data_only: bool = False,
 ):
+    """Add products to a payment page"""
     return get_paystack_wrapper().payment_pages.add_products(id=id, products=products)
 
 
@@ -110,4 +112,5 @@ def check_slug_available(
     slug: str,
     data_only: bool = False,
 ):
+    """Check the availability of a slug for a payment page."""
     return get_paystack_wrapper().payment_pages.check_slug_available(slug=slug)
