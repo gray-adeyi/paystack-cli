@@ -22,6 +22,7 @@ def create(
     send_sms: bool = False,
     data_only: bool = False,
 ):
+    """Create a plan on your integration"""
     return get_paystack_wrapper().plans.create(
         name=name,
         amount=amount,
@@ -49,6 +50,7 @@ def update(
     send_sms: bool = False,
     data_only: bool = False,
 ):
+    """Update a plan on your integration"""
     return get_paystack_wrapper().plans.update(
         id_or_code=id_or_code,
         name=name,
@@ -66,6 +68,7 @@ def update(
 @colorized_print
 @override_output
 def get_plan(id_or_code: str, data_only: bool = False):
+    """Get details of a plan on your integration."""
     return get_paystack_wrapper().plans.get_plan(id_or_code=id_or_code)
 
 
@@ -73,4 +76,5 @@ def get_plan(id_or_code: str, data_only: bool = False):
 @colorized_print
 @override_output
 def get_plans(id_or_code: str, data_only: bool = False):
+    """Fetch plans available on your integration."""
     return get_paystack_wrapper().plans.get_plans(id_or_code=id_or_code)

@@ -57,7 +57,12 @@ app.add_typer(
     ),
 )
 app.add_typer(subaccount_app, name="subacounts")
-app.add_typer(plan_app, name="plans")
+app.add_typer(
+    plan_app,
+    name="plans",
+    help=("The `plans` subcommand interacts with Plans API which allows"
+          " you to create and manage installment payment options on your integration."),
+)
 app.add_typer(subscription_app, name="subs")
 app.add_typer(product_app, name="products")
 app.add_typer(
@@ -71,8 +76,10 @@ app.add_typer(
 app.add_typer(
     payment_request_app,
     name="pr",
-    help=("The `pr` subcommand interacts with Payment Requests API"
-          " which allows you to manage requests for payment of goods and services."),
+    help=(
+        "The `pr` subcommand interacts with Payment Requests API"
+        " which allows you to manage requests for payment of goods and services."
+    ),
 )
 app.add_typer(settlement_app, name="settlements")
 app.add_typer(transfer_recipient_app, name="tr")
