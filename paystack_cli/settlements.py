@@ -18,6 +18,7 @@ def get_settlements(
     subaccount: Optional[str] = None,
     data_only: bool = False,
 ):
+    """Fetch settlements made to your settlement accounts."""
     return get_paystack_wrapper().settlements.get_settlements(
         page=page,
         pagination=pagination,
@@ -38,6 +39,7 @@ def get_settlement_txns(
     end_date: Optional[str] = None,
     data_only: bool = False,
 ):
+    """Get the transactions that make up a particular settlement"""
     return get_paystack_wrapper().settlements.get_settlement_transactions(
         id=id,
         pagination=pagination,

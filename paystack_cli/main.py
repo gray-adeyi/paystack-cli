@@ -90,7 +90,12 @@ app.add_typer(
         " which allows you to manage requests for payment of goods and services."
     ),
 )
-app.add_typer(settlement_app, name="settlements")
+app.add_typer(
+    settlement_app,
+    name="settlements",
+    help=("The `settlements` subcommand interacts with the Settlements API"
+          " which allows you gain insights into payouts made by Paystack to your bank account."),
+)
 app.add_typer(transfer_recipient_app, name="tr")
 app.add_typer(transfer_app, name="transfers")
 app.add_typer(transfer_control_app, name="transfer-ctrl")
