@@ -16,7 +16,7 @@ def initiate(body: str, data_only: bool = False):
     if currency is GHS, and cents, if currency is ZAR ) so paystack can process transactions as a batch.
 
     Note: The body is a json serializable string of a list of bulk charge instructions.
-    see pypaystack2.BulkChargeInstruction
+    see https://gray-adeyi.github.io/pypaystack2/
     """
     body = parse_cli_string(
         raw_string=body,

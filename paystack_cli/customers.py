@@ -12,6 +12,7 @@ customer_app = Typer()
 @colorized_print
 @override_output
 def get_customer(email_or_code: str, data_only: bool = False):
+    """Get details of a customer on your integration."""
     return get_paystack_wrapper().customers.get_customer(email_or_code=email_or_code)
 
 
@@ -25,6 +26,7 @@ def get_customers(
     pagination: int = 50,
 data_only: bool = False
 ):
+    """Fetches customers available on your integration"""
     return get_paystack_wrapper().customers.get_customers(
         start_date=start_date, end_date=end_date, page=page, pagination=pagination
     )
@@ -41,6 +43,7 @@ def create(
     metadata: Optional[str] = None,
 data_only: bool = False
 ):
+    """Fetches customers available on your integration."""
     if metadata:
         metadata = parse_cli_string(
             raw_string=metadata, arg_or_option_name="metadata", expected_type=dict
@@ -65,6 +68,7 @@ def update(
     metadata: Optional[str] = None,
 data_only: bool = False
 ):
+    """Update a customer's details on your integration"""
     if metadata:
         metadata = parse_cli_string(
             raw_string=metadata, arg_or_option_name="metadata", expected_type=dict
@@ -82,6 +86,7 @@ data_only: bool = False
 @colorized_print
 @override_output
 def flag(customer: str, risk_action: Optional[RiskAction] = None, data_only: bool = False):
+    """Whitelist or blacklist a customer on your integration"""
     return get_paystack_wrapper().customers.flag(
         customer=customer, risk_action=risk_action
     )
@@ -91,6 +96,7 @@ def flag(customer: str, risk_action: Optional[RiskAction] = None, data_only: boo
 @colorized_print
 @override_output
 def deactivate(auth_code: str, data_only: bool = False):
+    """Deactivate an authorization when the card needs to be forgotten"""
     return get_paystack_wrapper().customers.deactivate(auth_code=auth_code)
 
 
@@ -110,6 +116,7 @@ def validate(
     middle_name: Optional[str] = None,
 data_only: bool = False
 ):
+    """Validate a customer's identity"""
     return get_paystack_wrapper().customers.validate(
         email_or_code=email_or_code,
         first_name=first_name,

@@ -32,7 +32,7 @@ app = Typer(
 app.add_typer(transaction_app, name="txn")
 app.add_typer(transaction_split_app, name="txn-split")
 app.add_typer(terminal_app, name="terminals")
-app.add_typer(customer_app, name="customers")
+app.add_typer(customer_app, name="customers", help="The `customers` subcommand interacts with Customers API and allows you to create and manage customers in your integration.")
 app.add_typer(dva_app, name="dva")
 app.add_typer(app_pay_app, name="apple-pay", help="The `apple-pay` subcommand interacts with the Apple Pay API and allows you register your application's top-level domain or subdomain.")
 app.add_typer(subaccount_app, name="subacounts")
