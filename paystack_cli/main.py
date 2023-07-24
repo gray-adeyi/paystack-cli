@@ -145,7 +145,14 @@ app.add_typer(
         " which allows you to create and manage beneficiaries that you send money to."
     ),
 )
-app.add_typer(transfer_app, name="transfers")
+app.add_typer(
+    transfer_app,
+    name="transfers",
+    help=(
+        "The `transfers` subcommand interacts with Transfers API"
+        " which allows you to automate sending money on your integration"
+    ),
+)
 app.add_typer(transfer_control_app, name="transfer-ctrl")
 app.add_typer(
     bulk_charge_app,
