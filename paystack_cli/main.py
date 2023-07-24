@@ -153,7 +153,12 @@ app.add_typer(
         " which allows you to automate sending money on your integration"
     ),
 )
-app.add_typer(transfer_control_app, name="transfer-ctrl")
+app.add_typer(
+    transfer_control_app,
+    name="transfer-ctrl",
+    help=("The `transfer-ctrl` subcommand interacts with Transfers Control API"
+          " which allows you to manage settings of your transfers."),
+)
 app.add_typer(
     bulk_charge_app,
     name="bc",
