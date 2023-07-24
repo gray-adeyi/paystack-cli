@@ -24,6 +24,7 @@ def charge(
     birthday: Optional[str] = None,
         data_only: bool = False
 ):
+    """Initiate a payment by integrating the payment channel of your choice."""
     if bank:
         bank = parse_cli_string(
             raw_string=bank, arg_or_option_name="bank", expected_type=dict
@@ -61,6 +62,10 @@ def charge(
 @colorized_print
 @override_output
 def check_pending_charge(reference: str, data_only: bool = False):
+    """When you get "pending" as a charge status or if there was an exception when calling any of the
+    charge commands, wait 10 seconds or more, then make a check to see if its status has changed.
+    Don't call too early as you may get a lot more pending than you should.
+    """
     return get_paystack_wrapper().charge.check_pending_charge(reference=reference)
 
 
@@ -68,6 +73,7 @@ def check_pending_charge(reference: str, data_only: bool = False):
 @colorized_print
 @override_output
 def submit_otp(otp: str, reference: str, data_only: bool = False):
+    """Submit OTP to complete a charge"""
     return get_paystack_wrapper().charge.submit_otp(otp=otp, reference=reference)
 
 
@@ -75,6 +81,7 @@ def submit_otp(otp: str, reference: str, data_only: bool = False):
 @colorized_print
 @override_output
 def submit_pin(pin: str, reference: str, data_only: bool = False):
+    """Submit PIN to continue a charge"""
     return get_paystack_wrapper().charge.submit_pin(pin=pin, reference=reference)
 
 
@@ -82,6 +89,7 @@ def submit_pin(pin: str, reference: str, data_only: bool = False):
 @colorized_print
 @override_output
 def set_address(address: str, reference: str, city: str, state: str, zipcode: str, data_only: bool = False):
+    """Submit address to continue a charge"""
     return get_paystack_wrapper().charge.set_address(
         address=address, reference=reference, city=city, state=state, zipcode=zipcode
     )
@@ -91,6 +99,7 @@ def set_address(address: str, reference: str, city: str, state: str, zipcode: st
 @colorized_print
 @override_output
 def submit_phone(phone: str, reference: str, data_only: bool = False):
+    """Submit Phone when requested"""
     return get_paystack_wrapper().charge.submit_phone(phone=phone, reference=reference)
 
 
@@ -98,6 +107,7 @@ def submit_phone(phone: str, reference: str, data_only: bool = False):
 @colorized_print
 @override_output
 def submit_birthday(birthday: str, reference: str, data_only: bool = False):
+    """Submit Birthday when requested"""
     return get_paystack_wrapper().charge.submit_birthday(
         birthday=birthday, reference=reference
     )
