@@ -31,6 +31,7 @@ def create(
     split_code: Optional[str] = None,
     data_only: bool = False,
 ):
+    """Create a payment request for a transaction on your integration"""
     if line_items:
         line_items = parse_cli_string(
             raw_string=line_items,
@@ -72,6 +73,7 @@ def update(
     end_date: Optional[str] = None,
     data_only: bool = False,
 ):
+    """Update the payment request details on your integration"""
     return get_paystack_wrapper().payment_requests.update(
         customer=customer,
         status=status,
@@ -88,6 +90,7 @@ def update(
 @colorized_print
 @override_output
 def get_payment_request(id_or_code: str, data_only: bool = False):
+    """Get details of a payment request on your integration"""
     return get_paystack_wrapper().payment_requests.get_payment_request(
         id_or_code=id_or_code
     )
@@ -107,6 +110,7 @@ def get_payment_requests(
     end_date: Optional[str] = None,
     data_only: bool = False,
 ):
+    """Fetches the payment requests available on your integration."""
     return get_paystack_wrapper().payment_requests.get_payment_requests(
         customer=customer,
         status=status,
@@ -123,6 +127,7 @@ def get_payment_requests(
 @colorized_print
 @override_output
 def verify(code: str, data_only: bool = False):
+    """Verify details of a payment request on your integration."""
     return get_paystack_wrapper().payment_requests.verify(code=code)
 
 
@@ -130,6 +135,9 @@ def verify(code: str, data_only: bool = False):
 @colorized_print
 @override_output
 def archive(id_or_code: str, data_only: bool = False):
+    """Used to archive a payment request.
+
+    A payment request will no longer be fetched on list or returned on verify."""
     return get_paystack_wrapper().payment_requests.archive(id_or_code=id_or_code)
 
 
@@ -137,6 +145,7 @@ def archive(id_or_code: str, data_only: bool = False):
 @colorized_print
 @override_output
 def finalize(id_or_code: str, data_only: bool = False):
+    """Finalize a draft payment request"""
     return get_paystack_wrapper().payment_requests.finalize(id_or_code=id_or_code)
 
 
@@ -144,4 +153,5 @@ def finalize(id_or_code: str, data_only: bool = False):
 @colorized_print
 @override_output
 def get_total(data_only: bool = False):
+    """Get payment requests metric"""
     return get_paystack_wrapper().payment_requests.get_total()

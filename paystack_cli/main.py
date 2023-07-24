@@ -68,7 +68,12 @@ app.add_typer(
         " and provides a quick and secure way to collect payment for products."
     ),
 )
-app.add_typer(payment_request_app, name="pr")
+app.add_typer(
+    payment_request_app,
+    name="pr",
+    help=("The `pr` subcommand interacts with Payment Requests API"
+          " which allows you to manage requests for payment of goods and services."),
+)
 app.add_typer(settlement_app, name="settlements")
 app.add_typer(transfer_recipient_app, name="tr")
 app.add_typer(transfer_app, name="transfers")
