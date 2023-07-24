@@ -77,8 +77,10 @@ app.add_typer(
 app.add_typer(
     integration_app,
     name="integration",
-    help=("The `integration` subcommand interacts with Integration API"
-          " and allows you to manage some settings on your integration."),
+    help=(
+        "The `integration` subcommand interacts with Integration API"
+        " and allows you to manage some settings on your integration."
+    ),
 )
 app.add_typer(
     charge_app,
@@ -95,7 +97,14 @@ app.add_typer(
 )
 app.add_typer(refund_app, name="refunds")
 app.add_typer(verification_app, name="verification")
-app.add_typer(miscellaneous_app, name="misc")
+app.add_typer(
+    miscellaneous_app,
+    name="misc",
+    help=(
+        "The `misc` subcommand interacts with Miscellaneous API which is a "
+        "supporting API that can be used to provide more details to other APIs."
+    ),
+)
 
 
 @app.command()

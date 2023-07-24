@@ -9,6 +9,7 @@ miscellaneous_app = Typer()
 @colorized_print
 @override_output
 def get_providers(data_only: bool = False):
+    """Get a list of all providers for Dedicated Virtual Account"""
     return get_paystack_wrapper().miscellaneous.get_providers()
 
 
@@ -16,6 +17,7 @@ def get_providers(data_only: bool = False):
 @colorized_print
 @override_output
 def get_banks(data_only: bool = False):
+    """Get a list of all supported banks and their properties"""
     return get_paystack_wrapper().miscellaneous.get_banks()
 
 
@@ -23,6 +25,7 @@ def get_banks(data_only: bool = False):
 @colorized_print
 @override_output
 def get_states(data_only: bool = False):
+    """Get a list of states for a country for address verification."""
     return get_paystack_wrapper().miscellaneous.get_states()
 
 
@@ -30,4 +33,5 @@ def get_states(data_only: bool = False):
 @colorized_print
 @override_output
 def get_countries(data_only: bool = False):
+    """Gets a list of Countries that Paystack currently supports"""
     return get_paystack_wrapper().miscellaneous.get_countries()
