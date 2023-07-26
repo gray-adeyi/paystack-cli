@@ -1,5 +1,6 @@
 # paystack cli
-A command line app for interacting with [Paystack's](https://paystack.com/) API
+A command line app for interacting with [Paystack's](https://paystack.com/) API. Built with
+[Typer](https://typer.tiangolo.com/) and [Pypaystack2](https://gray-adeyi.github.io/pypaystack2/)
 
 ![utility in use](./paystack-cli.png)
 
