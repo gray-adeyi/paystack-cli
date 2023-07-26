@@ -28,7 +28,7 @@ def get_banks(
     previous: Optional[str] = None,
     gateway: Optional[Gateway] = None,
     type: Optional[BankType] = None,
-    currency: [Currency] = None,
+    currency: Optional[Currency] = None,
     pagination: int = 50,
     data_only: bool = False,
 ):
