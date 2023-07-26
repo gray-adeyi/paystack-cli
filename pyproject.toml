@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "paystack-cli"
-version = "0.1.1"
+version = "0.1.2"
 description = "A command line app for interacting with Paystack's API"
 authors = ["Gbenga Adeyi <adeyigbenga005@gmail.com>"]
 readme = "README.md"
