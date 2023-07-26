@@ -1,3 +1,4 @@
+from pypaystack2 import Reason
 from typer import Typer
 
 from paystack_cli.utils import get_paystack_wrapper, override_output, colorized_print
@@ -16,9 +17,11 @@ def get_balance_ledger(data_only: bool = False):
 @transfer_control_app.command()
 @colorized_print
 @override_output
-def resend_otp(data_only: bool = False):
+def resend_otp(transfer_code: str, reason: Reason, data_only: bool = False):
     """Generates a new OTP and sends to customer in the event they are having trouble receiving one."""
-    return get_paystack_wrapper().transfer_control.resend_otp()
+    return get_paystack_wrapper().transfer_control.resend_otp(
+        transfer_code=transfer_code, reason=reason
+    )
 
 
 @transfer_control_app.command()
