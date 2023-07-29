@@ -267,13 +267,13 @@ files = [
 
 [[package]]
 name = "pathspec"
-version = "0.11.1"
+version = "0.11.2"
 description = "Utility library for gitignore style pattern matching of file paths."
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "pathspec-0.11.1-py3-none-any.whl", hash = "sha256:d8af70af76652554bd134c22b3e8a1cc46ed7d91edcdd721ef1a0c51a84a5293"},
-    {file = "pathspec-0.11.1.tar.gz", hash = "sha256:2798de800fa92780e33acca925945e9a19a133b715067cf165b8866c15a31687"},
+    {file = "pathspec-0.11.2-py3-none-any.whl", hash = "sha256:1d6ed233af05e679efb96b1851550ea95bbb64b7c490b0f5aa52996c11e92a20"},
+    {file = "pathspec-0.11.2.tar.gz", hash = "sha256:e0d8d0ac2f12da61956eb2306b69f9469b42f4deb0f3cb6ed47b9cce9996ced3"},
 ]
 
 [[package]]
@@ -362,13 +362,13 @@ files = [
 
 [[package]]
 name = "pypaystack2"
-version = "2.0.0"
+version = "2.0.1"
 description = "A developer-friendly API wrapper."
 optional = false
 python-versions = ">=3.7,<4.0"
 files = [
-    {file = "pypaystack2-2.0.0-py3-none-any.whl", hash = "sha256:0074229229f7df5ed0c432c80a207a7c3c64712e3b1f5eff69736c1d2b4f7ab0"},
-    {file = "pypaystack2-2.0.0.tar.gz", hash = "sha256:2b128a4cef6ca6c27a4e195cbb713cddbb113352cd862c9d542b1fbdb0284171"},
+    {file = "pypaystack2-2.0.1-py3-none-any.whl", hash = "sha256:ffaeaa4b002c1acc4f2156913983960ae5384801684eb3c18cec560c29a649e3"},
+    {file = "pypaystack2-2.0.1.tar.gz", hash = "sha256:86991a00cb8bbaf330e57af5260a15c05cc4a21807a9597875e9e38624b04a60"},
 ]
 
 [package.dependencies]
