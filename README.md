@@ -21,3 +21,8 @@ removed with `paystack reset`. Run `paystack --help` to see available commands
 
 ## Source code
 [https://github.com/gray-adeyi/paystack-cli](https://github.com/gray-adeyi/paystack-cli)
+
+## Videos
+[Installing paystack cli on windows from binaries](https://youtu.be/N8TfuJJ9ycI?si=oFJM4hZQSbl5QBuH)
+[Installing paystack cli via pip on windows](https://youtu.be/JWWkTwER9xg?si=ZEdnFwSgaShkj7_H)
+[How to use paystack cli](https://youtu.be/GuYtyh1Ew5E?si=WQaBQshViLjawUft)
