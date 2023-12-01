@@ -230,7 +230,7 @@ def reset():
 @app.command()
 def version():
     """See CLI version"""
-    rprint("Paystack CLI Version 0.1.3")
+    rprint("Paystack CLI Version 0.1.4")
 
 
 def run():

@@ -1,21 +1,11 @@
 from typing import Optional
 
-from typer import Typer
 from pypaystack2 import Gateway, Country, BankType, Currency
+from typer import Typer
 
 from paystack_cli.utils import get_paystack_wrapper, colorized_print, override_output
 
 miscellaneous_app = Typer()
-
-
-@miscellaneous_app.command()
-@colorized_print
-@override_output
-def get_providers(pay_with_bank_transfer: bool = False, data_only: bool = False):
-    """Get a list of all providers for Dedicated Virtual Account"""
-    return get_paystack_wrapper().miscellaneous.get_providers(
-        pay_with_bank_transfer=pay_with_bank_transfer
-    )
 
 
 @miscellaneous_app.command()

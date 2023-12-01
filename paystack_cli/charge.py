@@ -19,6 +19,7 @@ def charge(
     email: str,
     amount: int,
     bank: Optional[str] = None,
+        bank_transfer: Optional[str] = None,
     auth_code: Optional[str] = None,
     pin: Optional[str] = None,
     metadata: Optional[str] = None,
@@ -33,6 +34,10 @@ def charge(
     if bank:
         bank = parse_cli_string(
             raw_string=bank, arg_or_option_name="bank", expected_type=dict
+        )
+    if bank_transfer:
+        bank_transfer = parse_cli_string(
+            raw_string=bank_transfer, arg_or_option_name="bank_transfer", expected_type=dict
         )
     if metadata:
         metadata = parse_cli_string(
@@ -52,6 +57,7 @@ def charge(
         email=email,
         amount=amount,
         bank=bank,
+        bank_transfer=bank_transfer,
         auth_code=auth_code,
         pin=pin,
         metadata=metadata,

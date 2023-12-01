@@ -4,9 +4,9 @@ import os.path
 from pathlib import Path
 from typing import Optional, Type
 
-from rich import print as rprint
 import typer
 from pypaystack2 import Paystack
+from rich import print as rprint
 from typer import get_app_dir
 
 APP_CONFIG_DIR_NAME = ".paystack-cli"
@@ -79,16 +79,16 @@ def parse_cli_string(
     """
     try:
         parsed_data = json.loads(raw_string)
-        if type(parsed_data) == expected_type:
+        if isinstance(parsed_data, expected_type):
             return parsed_data
-        if type(parsed_data) == dict and not many:
+        if isinstance(parsed_data, dict) and not many:
             return expected_type(**parsed_data)
-        if type(parsed_data) == list and many:
+        if isinstance(parsed_data, list) and many:
             return [expected_type(**item) for item in parsed_data]
     except json.decoder.JSONDecodeError:
         rprint(
             f"[bold red]Error![/bold red] unable to parse value in `{arg_or_option_name}` option or argument, expects a json decodable string"
-            f" that can be parsed into a {'`list` of ' if many else  ''}`{expected_type.__name__}`"
+            f" that can be parsed into a {'`list` of ' if many else ''}`{expected_type.__name__}`"
         )
         raise typer.Abort()
 

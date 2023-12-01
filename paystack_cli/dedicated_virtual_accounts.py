@@ -1,7 +1,8 @@
 from typing import Optional
 
+from pypaystack2 import Currency, Country
 from typer import Typer
-from pypaystack2 import Currency
+
 from paystack_cli.utils import get_paystack_wrapper, override_output, colorized_print
 
 dva_app = Typer()
@@ -14,6 +15,43 @@ def get_dva(dedicated_account_id: int, data_only: bool = False):
     """Get details of a dedicated virtual account on your integration."""
     return get_paystack_wrapper().dedicated_accounts.get_dedicated_account(
         dedicated_account_id=dedicated_account_id
+    )
+
+
+@dva_app.command()
+@colorized_print
+@override_output
+def assign(
+    email: str,
+    first_name: str,
+    last_name: str,
+    phone: str,
+    preferred_bank: str,
+    country: Country = Country.NIGERIA,
+    account_number: Optional[str] = None,
+    bvn: Optional[str] = None,
+    bank_code: Optional[str] = None,
+    subaccount: Optional[str] = None,
+    split_code: Optional[str] = None,
+):
+    """
+    Create a customer, validate the customer, and assign a DVA to the customer.
+        Note
+            * This feature is only available to businesses in Nigeria.
+            * Paystack currently supports Wema Bank and Titan Paystack.
+    """
+    return get_paystack_wrapper().dedicated_accounts.assign(
+        email=email,
+        first_name=first_name,
+        last_name=last_name,
+        phone=phone,
+        preferred_bank=preferred_bank,
+        country=country,
+        account_number=account_number,
+        bvn=bvn,
+        bank_code=bank_code,
+        subaccount=subaccount,
+        split_code=split_code,
     )
 
 

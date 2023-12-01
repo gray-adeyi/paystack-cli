@@ -1,4 +1,3 @@
-import json
 from typing import Optional
 
 from pypaystack2 import TransactionStatus, Currency, Channel, Bearer
