@@ -1,10 +1,10 @@
-[tool.poetry]
+[project]
 name = "paystack-cli"
-version = "0.1.4"
+version = "0.2.0"
 description = "A command line app for interacting with Paystack's API"
-authors = ["Gbenga Adeyi <adeyigbenga005@gmail.com>"]
-readme = "README.md"
-packages = [{include = "paystack_cli"}]
+authors = [
+    { name = "Gbenga Adeyi", email = "adeyigbenga005@gmail.com" }
+]
 keywords = ["paystack-python", "pypaystack", "paystack", "paystackapi"]
 license = "MIT"
 classifiers = [
@@ -12,22 +12,28 @@ classifiers = [
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
 ]
+dependencies = [
+    "pypaystack2>=2.0.3",
+    "typer[all]>=0.12.3",
+]
+readme = "README.md"
+requires-python = ">= 3.9"
 
-[tool.poetry.dependencies]
-python = ">=3.9,<3.13"
-pypaystack2 = "^2.0.2"
-typer = {extras = ["all"], version = "^0.9.0"}
-
-
-[tool.poetry.scripts]
-paystack = "paystack_cli.main:run"
-
-
-[tool.poetry.group.dev.dependencies]
-black = "^23.7.0"
-pyinstaller = "^5.13.0"
-ruff = "^0.1.6"
+[project.scripts]
+"paystack" = "paystack_cli.__main__:run"
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = [
+    "pyinstaller>=6.6.0",
+]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/paystack_cli"]

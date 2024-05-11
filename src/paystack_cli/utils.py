@@ -1,9 +1,11 @@
 import functools
 import json
 import os.path
+from json import JSONDecodeError
 from pathlib import Path
 from typing import Optional, Type
 
+import httpx
 import typer
 from pypaystack2 import Paystack
 from rich import print as rprint
@@ -66,7 +68,7 @@ def get_paystack_wrapper() -> Paystack:
 
 
 def parse_cli_string(
-    raw_string: str, arg_or_option_name: str, expected_type: Type, many: bool = False
+        raw_string: str, arg_or_option_name: str, expected_type: Type, many: bool = False
 ):
     """parses the json encoded string gotten form the cli input to the expected type.
 
@@ -85,12 +87,12 @@ def parse_cli_string(
             return expected_type(**parsed_data)
         if isinstance(parsed_data, list) and many:
             return [expected_type(**item) for item in parsed_data]
-    except json.decoder.JSONDecodeError:
+    except (json.decoder.JSONDecodeError, TypeError):
         rprint(
             f"[bold red]Error![/bold red] unable to parse value in `{arg_or_option_name}` option or argument, expects a json decodable string"
             f" that can be parsed into a {'`list` of ' if many else ''}`{expected_type.__name__}`"
         )
-        raise typer.Abort()
+        raise typer.Exit(code=1)
 
 
 def colorized_print(func):
@@ -105,9 +107,17 @@ def colorized_print(func):
 def override_output(func):
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
-        response = func(*args, **kwargs)
+        try:
+            response = func(*args, **kwargs)
+        except httpx.RequestError as error:
+            rprint(f"an error occurred while making a request to paystack: error: {error}")
+            raise typer.Exit(code=1)
         if kwargs["data_only"]:
-            return response.data
+            try:
+                return json.dumps(response.data)
+            except (JSONDecodeError, TypeError):
+                rprint(f"unable to decode data as json.\ngot: data: {response.data}\nmessage: {response.message}")
+                raise typer.Exit(code=1)
         return response
 
     return wrapper

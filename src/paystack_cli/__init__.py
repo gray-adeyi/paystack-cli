@@ -1,14 +1,14 @@
-from typer import Typer
 from rich import print as rprint
+from typer import Typer
 
-from paystack_cli.charge import charge_app
-from paystack_cli.miscellaneous import miscellaneous_app
 from paystack_cli.apple_pay import app_pay_app
 from paystack_cli.bulk_charges import bulk_charge_app
+from paystack_cli.charge import charge_app
 from paystack_cli.customers import customer_app
 from paystack_cli.dedicated_virtual_accounts import dva_app
 from paystack_cli.disputes import dispute_app
 from paystack_cli.integration import integration_app
+from paystack_cli.miscellaneous import miscellaneous_app
 from paystack_cli.payment_pages import payment_page_app
 from paystack_cli.payments_requests import payment_request_app
 from paystack_cli.plans import plan_app
@@ -230,12 +230,4 @@ def reset():
 @app.command()
 def version():
     """See CLI version"""
-    rprint("Paystack CLI Version 0.1.4")
-
-
-def run():
-    app()
-
-
-if __name__ == "__main__":
-    run()
+    rprint("Paystack CLI Version 0.2.0")
