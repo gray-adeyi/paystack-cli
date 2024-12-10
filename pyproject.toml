@@ -1,6 +1,6 @@
 [project]
 name = "paystack-cli"
-version = "0.2.0"
+version = "0.2.1"
 description = "A command line app for interacting with Paystack's API"
 authors = [
     { name = "Gbenga Adeyi", email = "adeyigbenga005@gmail.com" }
@@ -13,27 +13,23 @@ classifiers = [
     "Programming Language :: Python :: 3",
 ]
 dependencies = [
-    "pypaystack2>=2.0.3",
-    "typer[all]>=0.12.3",
+    "pypaystack2>=2.1.1",
+    "typer-slim[standard]>=0.15.1",
 ]
 readme = "README.md"
-requires-python = ">= 3.9"
+requires-python = ">= 3.11"
 
 [project.scripts]
-"paystack" = "paystack_cli.__main__:run"
+paystack = "paystack_cli.__main__:run"
+
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
-[tool.rye]
-managed = true
-dev-dependencies = [
-    "pyinstaller>=6.6.0",
+[dependency-groups]
+dev = [
+    "mypy>=1.13.0",
+    "pyinstaller>=6.11.1",
+    "ruff>=0.8.2",
 ]
-
-[tool.hatch.metadata]
-allow-direct-references = true
-
-[tool.hatch.build.targets.wheel]
-packages = ["src/paystack_cli"]
