@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.1] - Dec 10, 2024
+
+### Fixed
+
+- `paystack plans get-plans` bug
+
+## Changed
+
+- Deprecated `--data-only` flag in favour of `--json`
+    - Upgrade dependencies: `pypaystack2`, `typer`
+
 ## [0.2.0] - May 11, 2024
 
 ### Fixed
@@ -25,6 +36,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Incorrect project versioning
+
+### Changed
+
+- `--data-only` flag to `--json`
+- `subaccount` subcommand to `sub-acct`
+
+### Removed
+
+- Removed support for `python<=3.10`
 
 ## [0.1.3] - Jul 29, 2023
 
@@ -59,6 +79,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Commands and sub-commands for all methods supported by `pypaystack2`
 
 [unreleased]: https://github.com/gray-adeyi/paystack-cli/compare/v0.1.4...HEAD
+
+[0.2.0]: https://github.com/gray-adeyi/paystack-cli/compare/v0.2.0...v0.2.1
 
 [0.2.0]: https://github.com/gray-adeyi/paystack-cli/compare/v0.1.4...v0.2.0
 
