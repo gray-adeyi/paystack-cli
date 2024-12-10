@@ -17,6 +17,7 @@ def create(
     currency: Optional[Currency] = None,
     customer_note: Optional[str] = None,
     merchant_note: Optional[str] = None,
+    json: bool = False,
     data_only: bool = False,
 ):
     """Initiate a refund on your integration"""
@@ -32,7 +33,7 @@ def create(
 @refund_app.command()
 @colorized_print
 @override_output
-def get_refund(reference: str, data_only: bool = False):
+def get_refund(reference: str, data_only: bool = False, json: bool = False):
     """Get details of a refund on your integration."""
     return get_paystack_wrapper().refunds.get_refund(reference=reference)
 
@@ -48,6 +49,7 @@ def get_refunds(
     start_date: Optional[str] = None,
     end_date: Optional[str] = None,
     data_only: bool = False,
+    json: bool = False,
 ):
     """Fetch refunds available on your integration"""
     return get_paystack_wrapper().refunds.get_refunds(

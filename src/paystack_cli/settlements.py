@@ -16,6 +16,7 @@ def get_settlements(
     start_date: Optional[str] = None,
     end_date: Optional[str] = None,
     subaccount: Optional[str] = None,
+    json: bool = False,
     data_only: bool = False,
 ):
     """Fetch settlements made to your settlement accounts."""
@@ -37,6 +38,7 @@ def get_settlement_txns(
     page: int = 1,
     start_date: Optional[str] = None,
     end_date: Optional[str] = None,
+    json: bool = False,
     data_only: bool = False,
 ):
     """Get the transactions that make up a particular settlement"""

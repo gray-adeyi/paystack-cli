@@ -68,7 +68,7 @@ def get_paystack_wrapper() -> Paystack:
 
 
 def parse_cli_string(
-        raw_string: str, arg_or_option_name: str, expected_type: Type, many: bool = False
+    raw_string: str, arg_or_option_name: str, expected_type: Type, many: bool = False
 ):
     """parses the json encoded string gotten form the cli input to the expected type.
 
@@ -110,13 +110,20 @@ def override_output(func):
         try:
             response = func(*args, **kwargs)
         except httpx.RequestError as error:
-            rprint(f"an error occurred while making a request to paystack: error: {error}")
+            rprint(
+                f"an error occurred while making a request to paystack: error: {error}"
+            )
             raise typer.Exit(code=1)
         if kwargs["data_only"]:
+            rprint("`--data-only` flag as been deprecated, use `--json` instead")
+            raise typer.Exit(code=1)
+        if kwargs["json"]:
             try:
                 return json.dumps(response.data)
             except (JSONDecodeError, TypeError):
-                rprint(f"unable to decode data as json.\ngot: data: {response.data}\nmessage: {response.message}")
+                rprint(
+                    f"unable to decode data as json.\ngot: data: {response.data}\nmessage: {response.message}"
+                )
                 raise typer.Exit(code=1)
         return response
 

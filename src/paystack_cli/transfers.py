@@ -23,6 +23,7 @@ def initiate(
     currency: Optional[Currency] = None,
     reference: Optional[str] = None,
     source: str = "balance",
+    json: bool = False,
     data_only: bool = False,
 ):
     """Initiate transfer"""
@@ -39,7 +40,7 @@ def initiate(
 @transfer_app.command()
 @colorized_print
 @override_output
-def get_transfer(id_or_code: str, data_only: bool = False):
+def get_transfer(id_or_code: str, json: bool = False, data_only: bool = False):
     """Retrieve a transfer"""
     return get_paystack_wrapper().transfers.get_transfer(id_or_code=id_or_code)
 
@@ -53,6 +54,7 @@ def get_transfers(
     customer: Optional[str] = None,
     start_date: Optional[str] = None,
     end_date: Optional[str] = None,
+    json: bool = False,
     data_only: bool = False,
 ):
     """Retrieve transfers made to a customer"""
@@ -68,7 +70,7 @@ def get_transfers(
 @transfer_app.command()
 @colorized_print
 @override_output
-def verify(reference: str, data_only: bool = False):
+def verify(reference: str, json: bool = False, data_only: bool = False):
     """Verify a transfer"""
     return get_paystack_wrapper().transfers.verify(reference=reference)
 
@@ -76,7 +78,7 @@ def verify(reference: str, data_only: bool = False):
 @transfer_app.command()
 @colorized_print
 @override_output
-def finalize(transfer_code: str, otp: str, data_only: bool = False):
+def finalize(transfer_code: str, otp: str, json: bool = False, data_only: bool = False):
     """Finalize transfer"""
     return get_paystack_wrapper().transfers.finalize(
         transfer_code=transfer_code, otp=otp
@@ -86,7 +88,9 @@ def finalize(transfer_code: str, otp: str, data_only: bool = False):
 @transfer_app.command()
 @colorized_print
 @override_output
-def bulk_transfer(transfers: str, source="balance", data_only: bool = False):
+def bulk_transfer(
+    transfers: str, source="balance", json: bool = False, data_only: bool = False
+):
     """Transfer in bulk"""
     transfers = parse_cli_string(
         raw_string=transfers,

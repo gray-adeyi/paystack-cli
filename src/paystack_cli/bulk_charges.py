@@ -16,7 +16,7 @@ bulk_charge_app = Typer()
 @bulk_charge_app.command()
 @colorized_print
 @override_output
-def initiate(body: str, data_only: bool = False):
+def initiate(body: str, json: bool = False, data_only: bool = False):
     """Send a list of dictionaries with authorization codes and amount (in kobo if currency is NGN, pesewas,
     if currency is GHS, and cents, if currency is ZAR ) so paystack can process transactions as a batch.
 
@@ -35,7 +35,7 @@ def initiate(body: str, data_only: bool = False):
 @bulk_charge_app.command()
 @colorized_print
 @override_output
-def get_batch(id_or_code: str, data_only: bool = False):
+def get_batch(id_or_code: str, json: bool = False, data_only: bool = False):
     """This command retrieves a specific batch from its id or code.
 
     It also returns useful information on its progress by way of the
@@ -52,6 +52,7 @@ def get_batches(
     pagination: int = 50,
     start_date: Optional[str] = None,
     end_date: Optional[str] = None,
+    json: bool = False,
     data_only: bool = False,
 ):
     """This gets all bulk charge batches created by the integration."""
@@ -70,6 +71,7 @@ def get_charges_in_batch(
     page: int = 1,
     start_date: Optional[str] = None,
     end_date: Optional[str] = None,
+    json: bool = False,
     data_only: bool = False,
 ):
     """This command retrieves the charges associated with a specified batch code. Pagination parameters are available.
@@ -88,7 +90,7 @@ def get_charges_in_batch(
 @bulk_charge_app.command()
 @colorized_print
 @override_output
-def pause_batch(batch_code: str, data_only: bool = False):
+def pause_batch(batch_code: str, json: bool = False, data_only: bool = False):
     """Use this command to pause processing a batch."""
     return get_paystack_wrapper().bulk_charges.pause_batch(batch_code=batch_code)
 
@@ -96,6 +98,6 @@ def pause_batch(batch_code: str, data_only: bool = False):
 @bulk_charge_app.command()
 @colorized_print
 @override_output
-def resume_batch(batch_code: str, data_only: bool = False):
+def resume_batch(batch_code: str, json: bool = False, data_only: bool = False):
     """Use this command to resume processing a batch"""
     return get_paystack_wrapper().bulk_charges.resume_batch(batch_code=batch_code)

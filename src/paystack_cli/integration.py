@@ -8,7 +8,7 @@ integration_app = Typer()
 @integration_app.command()
 @colorized_print
 @override_output
-def get_payment_session_timeout(data_only: bool = False):
+def get_payment_session_timeout(json: bool = False, data_only: bool = False):
     """Fetch the payment session timeout on your integration"""
     return get_paystack_wrapper().integration.get_payment_session_timeout()
 
@@ -16,7 +16,9 @@ def get_payment_session_timeout(data_only: bool = False):
 @integration_app.command()
 @colorized_print
 @override_output
-def update_payment_session_timeout(timeout: int, data_only: bool = False):
+def update_payment_session_timeout(
+    timeout: int, json: bool = False, data_only: bool = False
+):
     """Update the payment session timeout on your integration"""
     return get_paystack_wrapper().integration.update_payment_session_timeout(
         timeout=timeout

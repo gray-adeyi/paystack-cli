@@ -2,6 +2,7 @@ from typing import Optional
 
 from pypaystack2 import Split, Currency, Bearer, SplitAccount
 from typer import Typer
+
 from paystack_cli.utils import (
     get_paystack_wrapper,
     parse_cli_string,
@@ -15,7 +16,7 @@ transaction_split_app = Typer()
 @transaction_split_app.command()
 @colorized_print
 @override_output
-def get_split(id: str, data_only: bool = False):
+def get_split(id: str, json: bool = False, data_only: bool = False):
     return get_paystack_wrapper().splits.get_split(id=id)
 
 
@@ -24,13 +25,14 @@ def get_split(id: str, data_only: bool = False):
 @override_output
 def get_splits(
     name: str,
-    sort_by: Optional[str],
-    page: Optional[int],
-    start_date: Optional[str],
-    end_date: Optional[str],
+    sort_by: Optional[str] = None,
+    page: Optional[int] = None,
+    start_date: Optional[str] = None,
+    end_date: Optional[str] = None,
     active: bool = True,
     pagination: int = 50,
     data_only: bool = False,
+    json: bool = False,
 ):
     """Get/search for the transaction splits available on your integration."""
     return get_paystack_wrapper().splits.get_splits(
@@ -39,7 +41,7 @@ def get_splits(
         page=page,
         start_date=start_date,
         end_date=end_date,
-        active=active,
+        active="true" if active else "false",
         pagination=pagination,
     )
 
@@ -54,6 +56,7 @@ def create(
     subaccounts: str,
     bearer_type: Bearer,
     bearer_subaccount: str,
+    json: bool = False,
     data_only: bool = False,
 ):
     """Create a split payment on your integration"""
@@ -82,6 +85,7 @@ def update(
     active: bool,
     bearer_type: Optional[Bearer],
     bearer_subaccount: Optional[str],
+    json: bool = False,
     data_only: bool = False,
 ):
     """Update a transaction split details on your integration"""
@@ -97,7 +101,7 @@ def update(
 @transaction_split_app.command()
 @colorized_print
 @override_output
-def remove(id: str, subaccount: str, data_only: bool = False):
+def remove(id: str, subaccount: str, json: bool = False, data_only: bool = False):
     """Remove a subaccount from a transaction split"""
     return get_paystack_wrapper().splits.remove(id=id, subaccount=subaccount)
 
@@ -105,7 +109,9 @@ def remove(id: str, subaccount: str, data_only: bool = False):
 @transaction_split_app.command()
 @colorized_print
 @override_output
-def add_or_update(id: str, subaccount: str, share: str, data_only: bool = False):
+def add_or_update(
+    id: str, subaccount: str, share: str, json: bool = False, data_only: bool = False
+):
     """Add a Subaccount to a Transaction Split, or update the share of an existing Subaccount in a Transaction Split"""
     return get_paystack_wrapper().splits.add_or_update(
         id=id, subaccount=subaccount, share=share

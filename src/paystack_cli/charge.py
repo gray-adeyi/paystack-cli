@@ -19,7 +19,7 @@ def charge(
     email: str,
     amount: int,
     bank: Optional[str] = None,
-        bank_transfer: Optional[str] = None,
+    bank_transfer: Optional[str] = None,
     auth_code: Optional[str] = None,
     pin: Optional[str] = None,
     metadata: Optional[str] = None,
@@ -29,6 +29,7 @@ def charge(
     device_id: Optional[str] = None,
     birthday: Optional[str] = None,
     data_only: bool = False,
+    json: bool = False,
 ):
     """Initiate a payment by integrating the payment channel of your choice."""
     if bank:
@@ -37,7 +38,9 @@ def charge(
         )
     if bank_transfer:
         bank_transfer = parse_cli_string(
-            raw_string=bank_transfer, arg_or_option_name="bank_transfer", expected_type=dict
+            raw_string=bank_transfer,
+            arg_or_option_name="bank_transfer",
+            expected_type=dict,
         )
     if metadata:
         metadata = parse_cli_string(
@@ -72,7 +75,7 @@ def charge(
 @charge_app.command()
 @colorized_print
 @override_output
-def check_pending_charge(reference: str, data_only: bool = False):
+def check_pending_charge(reference: str, json: bool = False, data_only: bool = False):
     """When you get "pending" as a charge status or if there was an exception when calling any of the
     charge commands, wait 10 seconds or more, then make a check to see if its status has changed.
     Don't call too early as you may get a lot more pending than you should.
@@ -83,7 +86,7 @@ def check_pending_charge(reference: str, data_only: bool = False):
 @charge_app.command()
 @colorized_print
 @override_output
-def submit_otp(otp: str, reference: str, data_only: bool = False):
+def submit_otp(otp: str, reference: str, json: bool = False, data_only: bool = False):
     """Submit OTP to complete a charge"""
     return get_paystack_wrapper().charge.submit_otp(otp=otp, reference=reference)
 
@@ -91,7 +94,7 @@ def submit_otp(otp: str, reference: str, data_only: bool = False):
 @charge_app.command()
 @colorized_print
 @override_output
-def submit_pin(pin: str, reference: str, data_only: bool = False):
+def submit_pin(pin: str, reference: str, json: bool = False, data_only: bool = False):
     """Submit PIN to continue a charge"""
     return get_paystack_wrapper().charge.submit_pin(pin=pin, reference=reference)
 
@@ -105,6 +108,7 @@ def set_address(
     city: str,
     state: str,
     zipcode: str,
+    json: bool = False,
     data_only: bool = False,
 ):
     """Submit address to continue a charge"""
@@ -116,7 +120,9 @@ def set_address(
 @charge_app.command()
 @colorized_print
 @override_output
-def submit_phone(phone: str, reference: str, data_only: bool = False):
+def submit_phone(
+    phone: str, reference: str, json: bool = False, data_only: bool = False
+):
     """Submit Phone when requested"""
     return get_paystack_wrapper().charge.submit_phone(phone=phone, reference=reference)
 
@@ -124,7 +130,9 @@ def submit_phone(phone: str, reference: str, data_only: bool = False):
 @charge_app.command()
 @colorized_print
 @override_output
-def submit_birthday(birthday: str, reference: str, data_only: bool = False):
+def submit_birthday(
+    birthday: str, reference: str, json: bool = False, data_only: bool = False
+):
     """Submit Birthday when requested"""
     return get_paystack_wrapper().charge.submit_birthday(
         birthday=birthday, reference=reference

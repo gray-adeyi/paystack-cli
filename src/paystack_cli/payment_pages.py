@@ -23,6 +23,7 @@ def create(
     metadata: Optional[str] = None,
     redirect_url: Optional[str] = None,
     custom_fields: Optional[str] = None,
+    json: bool = False,
     data_only: bool = False,
 ):
     if custom_fields:
@@ -56,6 +57,7 @@ def update(
     description: str,
     amount: int,
     active: Optional[bool] = None,
+    json: bool = False,
     data_only: bool = False,
 ):
     return get_paystack_wrapper().payment_pages.update(
@@ -72,6 +74,7 @@ def update(
 @override_output
 def get_page(
     id_or_slug: str,
+    json: bool = False,
     data_only: bool = False,
 ):
     return get_paystack_wrapper().payment_pages.get_page(id_or_slug=id_or_slug)
@@ -86,6 +89,7 @@ def get_pages(
     start_date: Optional[str] = None,
     end_date: Optional[str] = None,
     data_only: bool = False,
+    json: bool = False,
 ):
     """Fetch payment pages available on your integration."""
     return get_paystack_wrapper().payment_pages.get_pages(
@@ -100,6 +104,7 @@ def add_products(
     id: str,
     products: list[str],
     data_only: bool = False,
+    json: bool = False,
 ):
     """Add products to a payment page"""
     return get_paystack_wrapper().payment_pages.add_products(id=id, products=products)
@@ -110,6 +115,7 @@ def add_products(
 @override_output
 def check_slug_available(
     slug: str,
+    json: bool = False,
     data_only: bool = False,
 ):
     """Check the availability of a slug for a payment page."""

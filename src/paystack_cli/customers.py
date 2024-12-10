@@ -16,7 +16,7 @@ customer_app = Typer()
 @customer_app.command()
 @colorized_print
 @override_output
-def get_customer(email_or_code: str, data_only: bool = False):
+def get_customer(email_or_code: str, json: bool = False, data_only: bool = False):
     """Get details of a customer on your integration."""
     return get_paystack_wrapper().customers.get_customer(email_or_code=email_or_code)
 
@@ -29,6 +29,7 @@ def get_customers(
     end_date: Optional[str] = None,
     page: int = 1,
     pagination: int = 50,
+    json: bool = False,
     data_only: bool = False,
 ):
     """Fetches customers available on your integration"""
@@ -46,6 +47,7 @@ def create(
     last_name: Optional[str] = None,
     phone: Optional[str] = None,
     metadata: Optional[str] = None,
+    json: bool = False,
     data_only: bool = False,
 ):
     """Fetches customers available on your integration."""
@@ -71,6 +73,7 @@ def update(
     last_name: Optional[str] = None,
     phone: Optional[str] = None,
     metadata: Optional[str] = None,
+    json: bool = False,
     data_only: bool = False,
 ):
     """Update a customer's details on your integration"""
@@ -91,7 +94,10 @@ def update(
 @colorized_print
 @override_output
 def flag(
-    customer: str, risk_action: Optional[RiskAction] = None, data_only: bool = False
+    customer: str,
+    risk_action: Optional[RiskAction] = None,
+    json: bool = False,
+    data_only: bool = False,
 ):
     """Whitelist or blacklist a customer on your integration"""
     return get_paystack_wrapper().customers.flag(
@@ -102,7 +108,7 @@ def flag(
 @customer_app.command()
 @colorized_print
 @override_output
-def deactivate(auth_code: str, data_only: bool = False):
+def deactivate(auth_code: str, json: bool = False, data_only: bool = False):
     """Deactivate an authorization when the card needs to be forgotten"""
     return get_paystack_wrapper().customers.deactivate(auth_code=auth_code)
 
@@ -121,6 +127,7 @@ def validate(
     bank_code: Optional[str] = None,
     account_number: Optional[str] = None,
     middle_name: Optional[str] = None,
+    json: bool = False,
     data_only: bool = False,
 ):
     """Validate a customer's identity"""

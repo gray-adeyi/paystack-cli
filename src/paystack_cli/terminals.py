@@ -16,7 +16,7 @@ terminal_app = Typer()
 @terminal_app.command()
 @colorized_print
 @override_output
-def get_terminal(terminal_id: str, data_only: bool = False):
+def get_terminal(terminal_id: str, json: bool = False, data_only: bool = False):
     """Get the details of a Terminal"""
     return get_paystack_wrapper().terminals.get_terminal(terminal_id=terminal_id)
 
@@ -28,6 +28,7 @@ def get_terminals(
     pagination: int = 50,
     next: Optional[str] = None,
     previous: Optional[str] = None,
+    json: bool = False,
     data_only: bool = False,
 ):
     """List the Terminals available on your integration"""
@@ -39,7 +40,7 @@ def get_terminals(
 @terminal_app.command()
 @colorized_print
 @override_output
-def get_terminal_status(terminal_id: str, data_only: bool = False):
+def get_terminal_status(terminal_id: str, json: bool = False, data_only: bool = False):
     """Check the availability of a Terminal before sending an event to it."""
     return get_paystack_wrapper().terminals.get_terminal_status(terminal_id=terminal_id)
 
@@ -47,7 +48,13 @@ def get_terminal_status(terminal_id: str, data_only: bool = False):
 @terminal_app.command()
 @colorized_print
 @override_output
-def update_terminal(terminal_id: str, name: str, address: str, data_only: bool = False):
+def update_terminal(
+    terminal_id: str,
+    name: str,
+    address: str,
+    json: bool = False,
+    data_only: bool = False,
+):
     """Update the details of a Terminal"""
     return get_paystack_wrapper().terminals.updated_terminal(
         terminal_id=terminal_id, name=name, address=address
@@ -57,7 +64,9 @@ def update_terminal(terminal_id: str, name: str, address: str, data_only: bool =
 @terminal_app.command()
 @colorized_print
 @override_output
-def commission_terminal(serial_number: str, data_only: bool = False):
+def commission_terminal(
+    serial_number: str, json: bool = False, data_only: bool = False
+):
     """Activate your debug device by linking it to your integration"""
     return get_paystack_wrapper().terminals.commission_terminal(
         serial_number=serial_number
@@ -67,7 +76,9 @@ def commission_terminal(serial_number: str, data_only: bool = False):
 @terminal_app.command()
 @colorized_print
 @override_output
-def decommission_terminal(serial_number: str, data_only: bool = False):
+def decommission_terminal(
+    serial_number: str, json: bool = False, data_only: bool = False
+):
     """Unlink your debug device from your integration"""
     return get_paystack_wrapper().terminals.decommission_terminal(
         serial_number=serial_number
@@ -77,7 +88,9 @@ def decommission_terminal(serial_number: str, data_only: bool = False):
 @terminal_app.command()
 @colorized_print
 @override_output
-def get_event_status(terminal_id: str, event_id: str, data_only: bool = False):
+def get_event_status(
+    terminal_id: str, event_id: str, json: bool = False, data_only: bool = False
+):
     """Check the status of an event sent to the Terminal"""
     return get_paystack_wrapper().terminals.get_event_status(
         terminal_id=terminal_id, event_id=event_id
@@ -92,6 +105,7 @@ def send_event(
     type: TerminalEvent,
     action: TerminalEventAction,
     data: str,
+    json: bool = False,
     data_only: bool = False,
 ):
     """Send an event from your application to the Paystack Terminal"""

@@ -16,7 +16,7 @@ transaction_app = Typer()
 @transaction_app.command()
 @colorized_print
 @override_output
-def get_txn(id: str, data_only: bool = False):
+def get_txn(id: str, json: bool = False, data_only: bool = False):
     """Get details of a transaction carried out on your integration."""
     return get_paystack_wrapper().transactions.get_transaction(id=id)
 
@@ -25,14 +25,15 @@ def get_txn(id: str, data_only: bool = False):
 @colorized_print
 @override_output
 def get_txns(
-        customer_id: Optional[str] = None,
-        start_date: Optional[str] = None,
-        end_date: Optional[str] = None,
-        status: Optional[TransactionStatus] = None,
-        page: Optional[int] = None,
-        amount: Optional[int] = None,
-        pagination: int = 50,
-        data_only: bool = False,
+    customer_id: Optional[str] = None,
+    start_date: Optional[str] = None,
+    end_date: Optional[str] = None,
+    status: Optional[TransactionStatus] = None,
+    page: Optional[int] = None,
+    amount: Optional[int] = None,
+    pagination: int = 50,
+    json: bool = False,
+    data_only: bool = False,
 ):
     """Fetch transactions carried out on your integration."""
     return get_paystack_wrapper().transactions.get_transactions(
@@ -49,7 +50,7 @@ def get_txns(
 @transaction_app.command()
 @colorized_print
 @override_output
-def get_timeline(id_or_ref: str, data_only: bool = False):
+def get_timeline(id_or_ref: str, json: bool = False, data_only: bool = False):
     """View the timeline of a transaction"""
     return get_paystack_wrapper().transactions.get_timeline(id_or_ref=id_or_ref)
 
@@ -58,18 +59,19 @@ def get_timeline(id_or_ref: str, data_only: bool = False):
 @colorized_print
 @override_output
 def charge(
-        amount: int,
-        email: str,
-        auth_code: str,
-        reference: Optional[str] = None,
-        currency: Optional[Currency] = None,
-        metadata: Optional[str] = None,
-        channels: Optional[list[Channel]] = None,
-        subaccount: Optional[str] = None,
-        transaction_charge: Optional[int] = None,
-        bearer: Optional[Bearer] = None,
-        queue: bool = False,
-        data_only: bool = False,
+    amount: int,
+    email: str,
+    auth_code: str,
+    reference: Optional[str] = None,
+    currency: Optional[Currency] = None,
+    metadata: Optional[str] = None,
+    channels: Optional[list[Channel]] = None,
+    subaccount: Optional[str] = None,
+    transaction_charge: Optional[int] = None,
+    bearer: Optional[Bearer] = None,
+    queue: bool = False,
+    json: bool = False,
+    data_only: bool = False,
 ):
     """All authorizations marked as reusable can be charged with this endpoint whenever you need to receive payments."""
     if metadata:
@@ -95,18 +97,19 @@ def charge(
 @colorized_print
 @override_output
 def export(
-        page: Optional[int] = None,
-        start_date: Optional[str] = None,
-        end_date: Optional[str] = None,
-        customer_id: Optional[str] = None,
-        status: Optional[TransactionStatus] = None,
-        currency: Optional[Currency] = None,
-        amount: Optional[int] = None,
-        settled: Optional[bool] = None,
-        settlement_id: Optional[int] = None,
-        payment_page: Optional[int] = None,
-        pagination: int = 50,
-        data_only: bool = False,
+    page: Optional[int] = None,
+    start_date: Optional[str] = None,
+    end_date: Optional[str] = None,
+    customer_id: Optional[str] = None,
+    status: Optional[TransactionStatus] = None,
+    currency: Optional[Currency] = None,
+    amount: Optional[int] = None,
+    settled: Optional[bool] = None,
+    settlement_id: Optional[int] = None,
+    payment_page: Optional[int] = None,
+    pagination: int = 50,
+    json: bool = False,
+    data_only: bool = False,
 ):
     """Fetch transactions carried out on your integration."""
     return get_paystack_wrapper().transactions.export(
@@ -128,20 +131,21 @@ def export(
 @colorized_print
 @override_output
 def init(
-        amount: int,
-        email: str,
-        currency: Optional[Currency] = None,
-        reference: Optional[str] = None,
-        callback_url: Optional[str] = None,
-        plan_id: Optional[str] = None,
-        invoice_limit: Optional[int] = None,
-        metadata: Optional[str] = None,
-        channels: Optional[list[Channel]] = None,
-        split_code: Optional[str] = None,
-        subaccount: Optional[str] = None,
-        transfer_charge: Optional[int] = None,
-        bearer: Optional[Bearer] = None,
-        data_only: bool = False,
+    amount: int,
+    email: str,
+    currency: Optional[Currency] = None,
+    reference: Optional[str] = None,
+    callback_url: Optional[str] = None,
+    plan_id: Optional[str] = None,
+    invoice_limit: Optional[int] = None,
+    metadata: Optional[str] = None,
+    channels: Optional[list[Channel]] = None,
+    split_code: Optional[str] = None,
+    subaccount: Optional[str] = None,
+    transfer_charge: Optional[int] = None,
+    bearer: Optional[Bearer] = None,
+    json: bool = False,
+    data_only: bool = False,
 ):
     """Initialize a transaction"""
     if metadata:
@@ -169,13 +173,14 @@ def init(
 @colorized_print
 @override_output
 def partial_debit(
-        auth_code: str,
-        currency: Currency,
-        amount: int,
-        email: str,
-        reference: Optional[str] = None,
-        at_least: Optional[int] = None,
-        data_only: bool = False,
+    auth_code: str,
+    currency: Currency,
+    amount: int,
+    email: str,
+    reference: Optional[str] = None,
+    at_least: Optional[int] = None,
+    json: bool = False,
+    data_only: bool = False,
 ):
     """Retrieve part of a payment from a customer"""
     get_paystack_wrapper().transactions.partial_debit(
@@ -192,11 +197,12 @@ def partial_debit(
 @colorized_print
 @override_output
 def totals(
-        page: Optional[int] = None,
-        start_date: Optional[str] = None,
-        end_date: Optional[str] = None,
-        pagination: int = 50,
-        data_only: bool = False,
+    page: Optional[int] = None,
+    start_date: Optional[str] = None,
+    end_date: Optional[str] = None,
+    pagination: int = 50,
+    json: bool = False,
+    data_only: bool = False,
 ):
     """Total amount received on your account"""
     get_paystack_wrapper().transactions.totals(
@@ -207,5 +213,5 @@ def totals(
 @transaction_app.command()
 @colorized_print
 @override_output
-def verify(reference: str, data_only: bool = False):
+def verify(reference: str, json: bool = False, data_only: bool = False):
     get_paystack_wrapper().transactions.verify(reference=reference)

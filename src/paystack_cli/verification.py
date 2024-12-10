@@ -19,6 +19,7 @@ def validate_account(
     country_code: Country,
     document_type: Document,
     document_number: Optional[str] = None,
+    json: bool = False,
     data_only: bool = False,
 ):
     """Confirm the authenticity of a customer's account number before sending money"""
@@ -36,7 +37,7 @@ def validate_account(
 @verification_app.command()
 @colorized_print
 @override_output
-def resolve_card_bin(bin: str, data_only: bool = False):
+def resolve_card_bin(bin: str, json: bool = False, data_only: bool = False):
     """Get more information about a customer's card"""
     return get_paystack_wrapper().verification.resolve_card_bin(bin=bin)
 
@@ -45,7 +46,7 @@ def resolve_card_bin(bin: str, data_only: bool = False):
 @colorized_print
 @override_output
 def resolve_account_number(
-    account_number: str, bank_code: str, data_only: bool = False
+    account_number: str, bank_code: str, json: bool = False, data_only: bool = False
 ):
     """Confirm an account belongs to the right customer"""
     return get_paystack_wrapper().verification.resolve_account_number(

@@ -16,6 +16,7 @@ def create(
     authorization: Optional[str] = None,
     start_date: Optional[str] = None,
     data_only: bool = False,
+    json: bool = False,
 ):
     """Create a subscription on your integration"""
     return get_paystack_wrapper().subscriptions.create(
@@ -29,7 +30,7 @@ def create(
 @subscription_app.command()
 @colorized_print
 @override_output
-def get_subscription(id_or_code: str, data_only: bool = False):
+def get_subscription(id_or_code: str, json: bool = False, data_only: bool = False):
     """Fetch details of a subscription on your integration."""
     return get_paystack_wrapper().subscriptions.get_subscription(id_or_code=id_or_code)
 
@@ -42,6 +43,7 @@ def get_subscriptions(
     pagination: int = 50,
     customer: Optional[int] = None,
     plan: Optional[int] = None,
+    json: bool = False,
     data_only: bool = False,
 ):
     """Fetch subscriptions available on your integration."""
@@ -53,7 +55,7 @@ def get_subscriptions(
 @subscription_app.command()
 @colorized_print
 @override_output
-def get_update_link(code: str, data_only: bool = False):
+def get_update_link(code: str, json: bool = False, data_only: bool = False):
     """Generate a link for updating the card on a subscription"""
     return get_paystack_wrapper().subscriptions.get_update_link(code=code)
 
@@ -61,7 +63,7 @@ def get_update_link(code: str, data_only: bool = False):
 @subscription_app.command()
 @colorized_print
 @override_output
-def send_update_link(code: str, data_only: bool = False):
+def send_update_link(code: str, json: bool = False, data_only: bool = False):
     """Email a customer a link for updating the card on their subscription"""
     return get_paystack_wrapper().subscriptions.send_update_link(code=code)
 
@@ -69,7 +71,7 @@ def send_update_link(code: str, data_only: bool = False):
 @subscription_app.command()
 @colorized_print
 @override_output
-def enable(code: str, token: str, data_only: bool = False):
+def enable(code: str, token: str, json: bool = False, data_only: bool = False):
     """Enable a subscription on your integration"""
     return get_paystack_wrapper().subscriptions.enable(code=code, token=token)
 
@@ -77,6 +79,6 @@ def enable(code: str, token: str, data_only: bool = False):
 @subscription_app.command()
 @colorized_print
 @override_output
-def disable(code: str, token: str, data_only: bool = False):
+def disable(code: str, token: str, json: bool = False, data_only: bool = False):
     """Disable a subscription on your integration"""
     return get_paystack_wrapper().subscriptions.disable(code=code, token=token)

@@ -20,6 +20,7 @@ def get_banks(
     type: Optional[BankType] = None,
     currency: Optional[Currency] = None,
     pagination: int = 50,
+    json: bool = False,
     data_only: bool = False,
 ):
     """Get a list of all supported banks and their properties"""
@@ -38,7 +39,7 @@ def get_banks(
 @miscellaneous_app.command()
 @colorized_print
 @override_output
-def get_states(country: Country, data_only: bool = False):
+def get_states(country: Country, data_only: bool = False, json: bool = False):
     """Get a list of states for a country for address verification."""
     return get_paystack_wrapper().miscellaneous.get_states(country=country)
 
@@ -46,6 +47,6 @@ def get_states(country: Country, data_only: bool = False):
 @miscellaneous_app.command()
 @colorized_print
 @override_output
-def get_countries(data_only: bool = False):
+def get_countries(json: bool = False, data_only: bool = False):
     """Gets a list of Countries that Paystack currently supports"""
     return get_paystack_wrapper().miscellaneous.get_countries()

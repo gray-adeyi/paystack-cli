@@ -1,6 +1,6 @@
 from typing import Optional
 
-from pypaystack2 import Interval, Currency
+from pypaystack2 import Interval, Currency, Status
 from typer import Typer
 
 from paystack_cli.utils import get_paystack_wrapper, override_output, colorized_print
@@ -21,6 +21,7 @@ def create(
     send_invoices: bool = False,
     send_sms: bool = False,
     data_only: bool = False,
+    json: bool = False,
 ):
     """Create a plan on your integration"""
     return get_paystack_wrapper().plans.create(
@@ -49,6 +50,7 @@ def update(
     send_invoices: bool = False,
     send_sms: bool = False,
     data_only: bool = False,
+    json: bool = False,
 ):
     """Update a plan on your integration"""
     return get_paystack_wrapper().plans.update(
@@ -67,7 +69,11 @@ def update(
 @plan_app.command()
 @colorized_print
 @override_output
-def get_plan(id_or_code: str, data_only: bool = False):
+def get_plan(
+    id_or_code: str,
+    data_only: bool = False,
+    json: bool = False,
+):
     """Get details of a plan on your integration."""
     return get_paystack_wrapper().plans.get_plan(id_or_code=id_or_code)
 
@@ -75,6 +81,20 @@ def get_plan(id_or_code: str, data_only: bool = False):
 @plan_app.command()
 @colorized_print
 @override_output
-def get_plans(id_or_code: str, data_only: bool = False):
+def get_plans(
+    page: int = 1,
+    pagination: int = 50,
+    status: Status | None = None,
+    interval: Interval | None = None,
+    amount: int | None = None,
+    data_only: bool = False,
+    json: bool = False,
+):
     """Fetch plans available on your integration."""
-    return get_paystack_wrapper().plans.get_plans(id_or_code=id_or_code)
+    return get_paystack_wrapper().plans.get_plans(
+        page=page,
+        pagination=pagination,
+        status=status,
+        interval=interval,
+        amount=amount,
+    )

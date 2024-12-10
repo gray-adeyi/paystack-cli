@@ -18,6 +18,7 @@ def create(
     currency: Currency,
     unlimited: Optional[bool] = None,
     quantity: Optional[int] = None,
+    json: bool = False,
     data_only: bool = False,
 ):
     """Create a product on your integration"""
@@ -42,6 +43,7 @@ def update(
     currency: Currency,
     unlimited: Optional[bool] = None,
     quantity: Optional[int] = None,
+    json: bool = False,
     data_only: bool = False,
 ):
     """Update a product details on your integration"""
@@ -59,7 +61,7 @@ def update(
 @product_app.command()
 @colorized_print
 @override_output
-def get_product(id: str, data_only: bool = False):
+def get_product(id: str, json: bool = False, data_only: bool = False):
     """Get details of a product on your integration."""
     return get_paystack_wrapper().products.get_product(id=id)
 
@@ -73,6 +75,7 @@ def get_products(
     start_date: Optional[str] = None,
     end_date: Optional[str] = None,
     data_only: bool = False,
+    json: bool = False,
 ):
     """Fetches products available on your integration."""
     return get_paystack_wrapper().products.get_products(

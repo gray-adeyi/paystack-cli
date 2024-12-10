@@ -26,6 +26,7 @@ def create(
     auth_code: Optional[str] = None,
     metadata: Optional[str] = None,
     data_only: bool = False,
+    json: bool = False,
 ):
     """Creates a new recipient. A duplicate account number will lead to the retrieval of the existing record."""
     if metadata:
@@ -48,7 +49,11 @@ def create(
 @colorized_print
 @override_output
 def update(
-    id_or_code: str, name: str, email: Optional[str] = None, data_only: bool = False
+    id_or_code: str,
+    name: str,
+    email: Optional[str] = None,
+    json: bool = False,
+    data_only: bool = False,
 ):
     """Update an existing recipient. An duplicate account number will lead to the retrieval of the existing record."""
     return get_paystack_wrapper().transfer_recipients.update(
@@ -59,7 +64,9 @@ def update(
 @transfer_recipient_app.command()
 @colorized_print
 @override_output
-def get_transfer_recipient(id_or_code: str, data_only: bool = False):
+def get_transfer_recipient(
+    id_or_code: str, json: bool = False, data_only: bool = False
+):
     """Fetch the details of a transfer recipient"""
     return get_paystack_wrapper().transfer_recipients.get_transfer_recipient(
         id_or_code=id_or_code
@@ -74,6 +81,7 @@ def get_transfer_recipients(
     pagination: int = 50,
     start_date: Optional[str] = None,
     end_date: Optional[str] = None,
+    json: bool = False,
     data_only: bool = False,
 ):
     """Fetch transfer recipients available on your integration"""
@@ -85,7 +93,7 @@ def get_transfer_recipients(
 @transfer_recipient_app.command()
 @colorized_print
 @override_output
-def bulk_create(batch: str, data_only: bool = False):
+def bulk_create(batch: str, json: bool = False, data_only: bool = False):
     """Create multiple transfer recipients in batches.
 
     A duplicate account number will lead to the retrieval of the existing record."""
@@ -98,6 +106,6 @@ def bulk_create(batch: str, data_only: bool = False):
 @transfer_recipient_app.command()
 @colorized_print
 @override_output
-def delete(id_or_code: str, data_only: bool = False):
+def delete(id_or_code: str, json: bool = False, data_only: bool = False):
     """Deletes a transfer recipient (sets the transfer recipient to inactive)"""
     return get_paystack_wrapper().transfer_recipients.delete(id_or_code=id_or_code)

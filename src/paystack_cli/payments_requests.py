@@ -29,6 +29,7 @@ def create(
     has_invoice: Optional[bool] = None,
     invoice_number: Optional[int] = None,
     split_code: Optional[str] = None,
+    json: bool = False,
     data_only: bool = False,
 ):
     """Create a payment request for a transaction on your integration"""
@@ -71,6 +72,7 @@ def update(
     pagination: int = 50,
     start_date: Optional[str] = None,
     end_date: Optional[str] = None,
+    json: bool = False,
     data_only: bool = False,
 ):
     """Update the payment request details on your integration"""
@@ -89,7 +91,7 @@ def update(
 @payment_request_app.command()
 @colorized_print
 @override_output
-def get_payment_request(id_or_code: str, data_only: bool = False):
+def get_payment_request(id_or_code: str, json: bool = False, data_only: bool = False):
     """Get details of a payment request on your integration"""
     return get_paystack_wrapper().payment_requests.get_payment_request(
         id_or_code=id_or_code
@@ -109,6 +111,7 @@ def get_payment_requests(
     start_date: Optional[str] = None,
     end_date: Optional[str] = None,
     data_only: bool = False,
+    json: bool = False,
 ):
     """Fetches the payment requests available on your integration."""
     return get_paystack_wrapper().payment_requests.get_payment_requests(
@@ -126,7 +129,7 @@ def get_payment_requests(
 @payment_request_app.command()
 @colorized_print
 @override_output
-def verify(code: str, data_only: bool = False):
+def verify(code: str, json: bool = False, data_only: bool = False):
     """Verify details of a payment request on your integration."""
     return get_paystack_wrapper().payment_requests.verify(code=code)
 
@@ -134,7 +137,7 @@ def verify(code: str, data_only: bool = False):
 @payment_request_app.command()
 @colorized_print
 @override_output
-def archive(id_or_code: str, data_only: bool = False):
+def archive(id_or_code: str, json: bool = False, data_only: bool = False):
     """Used to archive a payment request.
 
     A payment request will no longer be fetched on list or returned on verify."""
@@ -144,7 +147,7 @@ def archive(id_or_code: str, data_only: bool = False):
 @payment_request_app.command()
 @colorized_print
 @override_output
-def finalize(id_or_code: str, data_only: bool = False):
+def finalize(id_or_code: str, json: bool = False, data_only: bool = False):
     """Finalize a draft payment request"""
     return get_paystack_wrapper().payment_requests.finalize(id_or_code=id_or_code)
 
@@ -152,6 +155,6 @@ def finalize(id_or_code: str, data_only: bool = False):
 @payment_request_app.command()
 @colorized_print
 @override_output
-def get_total(data_only: bool = False):
+def get_total(json: bool = False, data_only: bool = False):
     """Get payment requests metric"""
     return get_paystack_wrapper().payment_requests.get_total()

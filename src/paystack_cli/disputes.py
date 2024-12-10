@@ -11,7 +11,7 @@ dispute_app = Typer()
 @dispute_app.command()
 @colorized_print
 @override_output
-def get_dispute(id: str, data_only: bool = False):
+def get_dispute(id: str, json: bool = False, data_only: bool = False):
     """Get more details about a dispute."""
     return get_paystack_wrapper().disputes.get_dispute(id=id)
 
@@ -26,6 +26,7 @@ def get_disputes(
     page: int = 1,
     transaction: Optional[str] = None,
     status: Optional[DisputeStatus] = None,
+    json: bool = False,
     data_only: bool = False,
 ):
     """Fetches disputes filed against you"""
@@ -42,7 +43,7 @@ def get_disputes(
 @dispute_app.command()
 @colorized_print
 @override_output
-def get_transaction_disputes(id: str, data_only: bool = False):
+def get_transaction_disputes(id: str, json: bool = False, data_only: bool = False):
     """This command retrieves disputes for a particular transaction"""
     return get_paystack_wrapper().disputes.get_transaction_disputes(id=id)
 
@@ -57,6 +58,7 @@ def resolve_dispute(
     refund_amount: int,
     uploaded_filename: str,
     evidence: Optional[int] = None,
+    json: bool = False,
     data_only: bool = False,
 ):
     """Resolve a dispute on your integration"""
@@ -80,6 +82,7 @@ def export_disputes(
     page: int = 1,
     transaction: Optional[str] = None,
     status: Optional[DisputeStatus] = None,
+    json: bool = False,
     data_only: bool = False,
 ):
     """Export disputes available on your integration."""
@@ -104,6 +107,7 @@ def add_evidence(
     service_details: str,
     delivery_address: Optional[str] = None,
     delivery_date: Optional[str] = None,
+    json: bool = False,
     data_only: bool = False,
 ):
     """Provide evidence for a dispute"""
@@ -121,7 +125,9 @@ def add_evidence(
 @dispute_app.command()
 @colorized_print
 @override_output
-def get_upload_url(id: str, upload_filename: str, data_only: bool = False):
+def get_upload_url(
+    id: str, upload_filename: str, json: bool = False, data_only: bool = False
+):
     """Get URL to upload a dispute evidence."""
     return get_paystack_wrapper().disputes.get_upload_url(
         id=id, upload_filename=upload_filename
@@ -135,6 +141,7 @@ def update_dispute(
     id: str,
     refund_amount: int,
     uploaded_filename: Optional[str],
+    json: bool = False,
     data_only: bool = False,
 ):
     """Update details of a dispute on your integration"""

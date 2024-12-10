@@ -27,6 +27,7 @@ def create(
     primary_contact_phone: Optional[str] = None,
     metadata: Optional[str] = None,
     data_only: bool = False,
+    json: bool = False,
 ):
     """Create a subacount on your integration."""
     if metadata:
@@ -63,6 +64,7 @@ def update(
     settlement_schedule: Optional[Schedule] = None,
     metadata: Optional[str] = None,
     data_only: bool = False,
+    json: bool = False,
 ):
     """Update a subaccount details on your integration."""
     if metadata:
@@ -88,7 +90,7 @@ def update(
 @subaccount_app.command()
 @colorized_print
 @override_output
-def get_subaccount(id_or_code: str, data_only: bool = False):
+def get_subaccount(id_or_code: str, data_only: bool = False, json: bool = False):
     """Get details of a subaccount on your integration."""
     return get_paystack_wrapper().subaccounts.get_subaccount(id_or_code=id_or_code)
 
@@ -102,6 +104,7 @@ def get_subaccounts(
     page: int = 1,
     pagination: int = 50,
     data_only: bool = False,
+    json: bool = False,
 ):
     """Fetch subaccounts available on your integration."""
     return get_paystack_wrapper().subaccounts.get_subaccounts(
