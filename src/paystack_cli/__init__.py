@@ -81,9 +81,9 @@ app.add_typer(
 )
 app.add_typer(
     subaccount_app,
-    name="subacounts",
+    name="sub-acct",
     help=(
-        "The `subacounts` subcommand interacts with Subaccounts API which "
+        "The `sub-acct` subcommand interacts with Subaccounts API which "
         "allows you to create and manage subaccounts on your integration. "
         "Subaccounts can be used to split payment between two accounts (your"
         " main account and a sub account)."
