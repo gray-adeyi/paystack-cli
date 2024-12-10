@@ -1,5 +1,9 @@
 # paystack cli
 
+[![Downloads](https://static.pepy.tech/badge/paystack-cli)](https://pepy.tech/project/paystack-cli)
+[![Downloads](https://static.pepy.tech/badge/paystack-cli/month)](https://pepy.tech/project/paystack-cli)
+[![Downloads](https://static.pepy.tech/badge/paystack-cli/week)](https://pepy.tech/project/paystack-cli)
+
 A command line app for interacting with [Paystack's](https://paystack.com/) API. Built with
 [Typer](https://typer.tiangolo.com/) and [Pypaystack2](https://gray-adeyi.github.io/pypaystack2/)
 
@@ -90,11 +94,11 @@ Response(
 ```
 
 By default, the results you get from the cli is a `Response` object which is a `NamedTuple` returned
-by [Pypaystack2](https://gray-adeyi.github.io/pypaystack2/). To get a json result, use the `--data-only`
+by [Pypaystack2](https://gray-adeyi.github.io/pypaystack2/). To get a json result, use the `--json`
 flag.
 
 ```bash
-paystack txn get-txns --pagination 1 --data-only
+paystack txn get-txns --pagination 1 --json
 ```
 
 Running the command above should yield a result similar to the dump shown below
